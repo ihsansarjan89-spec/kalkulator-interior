@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator Interior</title>
+  <style>
+    :root {
+      --latar: #f6f4f0;
+      --kartu: #ffffff;
+      --teks: #26221d;
+      --redup: #6b645b;
+      --garis: #ddd7cd;
+      --aksen: #8a5a2b;
+      --galat: #b3261e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px 48px;
+      background: var(--latar);
+      color: var(--teks);
+      font: 16px/1.5 system-ui, "Segoe UI", sans-serif;
+    }
+    main { max-width: 640px; margin: 0 auto; }
+    h1 { margin: 0 0 4px; font-size: 1.6rem; }
+    h2 { margin: 0 0 12px; font-size: 1.05rem; color: var(--aksen); }
+    .intro { margin: 0 0 20px; color: var(--redup); }
+    section {
+      margin-bottom: 16px;
+      padding: 16px;
+      background: var(--kartu);
+      border: 1px solid var(--garis);
+      border-radius: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    label { display: block; font-size: 0.85rem; color: var(--redup); }
+    input {
+      display: block;
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px 10px;
+      border: 1px solid var(--garis);
+      border-radius: 6px;
+      font: inherit;
+      color: var(--teks);
+    }
+    input:focus { outline: 2px solid var(--aksen); outline-offset: 1px; }
+    output {
+      display: block;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--garis);
+      font-weight: 600;
+    }
+    output.galat { color: var(--galat); font-weight: 400; }
+    footer { color: var(--redup); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Kalkulator Interior</h1>
+    <p class="intro">Perkiraan kebutuhan keramik lantai dan cat dinding untuk satu ruangan.</p>
+
+    <section>
+      <h2>Ukuran ruangan</h2>
+      <div class="grid">
+        <label>Panjang (m)
+          <input id="panjang" type="number" min="0" step="0.01" value="4">
+        </label>
+        <label>Lebar (m)
+          <input id="lebar" type="number" min="0" step="0.01" value="3">
+        </label>
+        <label>Tinggi dinding (m)
+          <input id="tinggi" type="number" min="0" step="0.01" value="3">
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Keramik lantai</h2>
+      <div class="grid">
+        <label>Panjang keramik (cm)
+          <input id="panjang-keramik" type="number" min="0" step="1" value="60">
+        </label>
+        <label>Lebar keramik (cm)
+          <input id="lebar-keramik" type="number" min="0" step="1" value="60">
+        </label>
+        <label>Isi per dus (keping)
+          <input id="isi-dus" type="number" min="1" step="1" value="4">
+        </label>
+        <label>Cadangan potongan (%)
+          <input id="cadangan" type="number" min="0" step="1" value="10">
+        </label>
+      </div>
+      <output id="hasil-keramik"></output>
+    </section>
+
+    <section>
+      <h2>Cat dinding</h2>
+      <div class="grid">
+        <label>Luas pintu dan jendela (m²)
+          <input id="bukaan" type="number" min="0" step="0.1" value="3.5">
+        </label>
+        <label>Jumlah lapis
+          <input id="lapis" type="number" min="1" step="1" value="2">
+        </label>
+        <label>Daya sebar (m² per liter)
+          <input id="daya-sebar" type="number" min="1" step="0.5" value="10">
+        </label>
+      </div>
+      <output id="hasil-cat"></output>
+    </section>
+
+    <footer>Hasil berupa perkiraan. Cocokkan dengan kondisi lapangan dan data teknis produk.</footer>
+  </main>
+
+  <script src="kalkulator.js"></script>
+  <script>
+    const ambil = (id) => Number(document.getElementById(id).value);
+    const format = (angka) =>
+      angka.toLocaleString("id-ID", { maximumFractionDigits: 2 });
+
+    function tampilkan(id, buatTeks) {
+      const el = document.getElementById(id);
+      try {
+        el.textContent = buatTeks();
+        el.classList.remove("galat");
+      } catch (galat) {
+        el.textContent = galat.message;
+        el.classList.add("galat");
+      }
+    }
+
+    function perbarui() {
+      const ruang = { panjangRuang: ambil("panjang"), lebarRuang: ambil("lebar") };
+
+      tampilkan("hasil-keramik", () => {
+        const hasil = hitungKeramik({
+          ...ruang,
+          panjangKeramikCm: ambil("panjang-keramik"),
+          lebarKeramikCm: ambil("lebar-keramik"),
+          isiPerDus: ambil("isi-dus"),
+          cadanganPersen: ambil("cadangan"),
+        });
+        return `Luas lantai ${format(hasil.luasLantai)} m²: ` +
+          `${format(hasil.jumlahKeping)} keping (${format(hasil.jumlahDus)} dus)`;
+      });
+
+      tampilkan("hasil-cat", () => {
+        const hasil = hitungCat({
+          ...ruang,
+          tinggiDinding: ambil("tinggi"),
+          luasBukaan: ambil("bukaan"),
+          jumlahLapis: ambil("lapis"),
+          dayaSebar: ambil("daya-sebar"),
+        });
+        return `Luas dinding ${format(hasil.luasDinding)} m²: ` +
+          `${format(hasil.liter)} liter cat`;
+      });
+    }
+
+    document.querySelectorAll("input").forEach((masukan) => {
+      masukan.addEventListener("input", perbarui);
+    });
+    perbarui();
+  </script>
+</body>
+</html>
