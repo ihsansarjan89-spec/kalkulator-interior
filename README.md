@@ -22,4 +22,12 @@ Isi ukuran ruangan, lalu hasilnya langsung muncul.
 
 Rumusnya ada di `kalkulator.js`.
 
+## Menjalankan tes
+
+Tes memeriksa bahwa rumus di atas menghasilkan angka yang benar. Perlu [Node.js](https://nodejs.org) versi 18 atau lebih baru.
+
+```bash
+node --test
+```
+
 Hasil berupa perkiraan. Cocokkan dengan kondisi lapangan dan data teknis produk.
