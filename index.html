@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kalkulator Interior</title>
+  <title>Kalkulator Interior, Sipil, dan Arsitektur</title>
   <style>
     :root {
       --latar: #f6f4f0;
@@ -15,6 +15,7 @@
       --galat: #b3261e;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       padding: 24px 16px 48px;
@@ -24,8 +25,26 @@
     }
     main { max-width: 640px; margin: 0 auto; }
     h1 { margin: 0 0 4px; font-size: 1.6rem; }
-    h2 { margin: 0 0 12px; font-size: 1.05rem; color: var(--aksen); }
-    .intro { margin: 0 0 20px; color: var(--redup); }
+    h2 {
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--aksen);
+      font-size: 1.2rem;
+      scroll-margin-top: 12px;
+    }
+    h3 { margin: 0 0 12px; font-size: 1.05rem; color: var(--aksen); }
+    .intro { margin: 0 0 12px; color: var(--redup); }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; }
+    nav a {
+      padding: 6px 14px;
+      border: 1px solid var(--garis);
+      border-radius: 999px;
+      background: var(--kartu);
+      color: var(--aksen);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    nav a:hover, nav a:focus-visible { border-color: var(--aksen); }
     section {
       margin-bottom: 16px;
       padding: 16px;
@@ -37,6 +56,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
+      align-items: end;
     }
     label { display: block; font-size: 0.85rem; color: var(--redup); }
     input {
@@ -56,18 +76,27 @@
       padding-top: 12px;
       border-top: 1px dashed var(--garis);
       font-weight: 600;
+      white-space: pre-line;
     }
     output.galat { color: var(--galat); font-weight: 400; }
-    footer { color: var(--redup); font-size: 0.8rem; }
+    .catatan { margin: 10px 0 0; color: var(--redup); font-size: 0.8rem; }
+    footer { margin-top: 24px; color: var(--redup); font-size: 0.8rem; }
   </style>
 </head>
 <body>
   <main>
-    <h1>Kalkulator Interior</h1>
-    <p class="intro">Perkiraan kebutuhan keramik lantai dan cat dinding untuk satu ruangan.</p>
+    <h1>Kalkulator Interior, Sipil, dan Arsitektur</h1>
+    <p class="intro">Perkiraan cepat kebutuhan material dan pemeriksaan ukuran untuk pekerjaan rumah tinggal.</p>
+    <nav aria-label="Kelompok kalkulator">
+      <a href="#interior">Interior</a>
+      <a href="#sipil">Sipil</a>
+      <a href="#arsitektur">Arsitektur</a>
+    </nav>
+
+    <h2 id="interior">Interior</h2>
 
     <section>
-      <h2>Ukuran ruangan</h2>
+      <h3>Ukuran ruangan</h3>
       <div class="grid">
         <label>Panjang (m)
           <input id="panjang" type="number" min="0" step="0.01" value="4">
@@ -82,7 +111,7 @@
     </section>
 
     <section>
-      <h2>Keramik lantai</h2>
+      <h3>Keramik lantai</h3>
       <div class="grid">
         <label>Panjang keramik (cm)
           <input id="panjang-keramik" type="number" min="0" step="1" value="60">
@@ -101,7 +130,7 @@
     </section>
 
     <section>
-      <h2>Cat dinding</h2>
+      <h3>Cat dinding</h3>
       <div class="grid">
         <label>Luas pintu dan jendela (m²)
           <input id="bukaan" type="number" min="0" step="0.1" value="3.5">
@@ -116,14 +145,143 @@
       <output id="hasil-cat"></output>
     </section>
 
-    <footer>Hasil berupa perkiraan. Cocokkan dengan kondisi lapangan dan data teknis produk.</footer>
+    <h2 id="sipil">Sipil</h2>
+
+    <section>
+      <h3>Beton</h3>
+      <div class="grid">
+        <label>Panjang (m)
+          <input id="beton-panjang" type="number" min="0" step="0.01" value="4">
+        </label>
+        <label>Lebar (m)
+          <input id="beton-lebar" type="number" min="0" step="0.01" value="3">
+        </label>
+        <label>Tebal atau tinggi (m)
+          <input id="beton-tebal" type="number" min="0" step="0.01" value="0.12">
+        </label>
+        <label>Jumlah elemen
+          <input id="beton-jumlah" type="number" min="1" step="1" value="1">
+        </label>
+        <label>Bagian semen
+          <input id="beton-semen" type="number" min="0" step="0.5" value="1">
+        </label>
+        <label>Bagian pasir
+          <input id="beton-pasir" type="number" min="0" step="0.5" value="2">
+        </label>
+        <label>Bagian kerikil
+          <input id="beton-kerikil" type="number" min="0" step="0.5" value="3">
+        </label>
+        <label>Berat semen per sak (kg)
+          <input id="beton-sak" type="number" min="1" step="1" value="50">
+        </label>
+        <label>Cadangan (%)
+          <input id="beton-cadangan" type="number" min="0" step="1" value="5">
+        </label>
+      </div>
+      <output id="hasil-beton"></output>
+      <p class="catatan">Bahan dihitung dari perbandingan volume (faktor volume kering 1,54). Untuk beton struktur, pakai mix design dan mutu yang disyaratkan.</p>
+    </section>
+
+    <section>
+      <h3>Dinding bata</h3>
+      <div class="grid">
+        <label>Panjang dinding (m)
+          <input id="bata-panjang-dinding" type="number" min="0" step="0.01" value="4">
+        </label>
+        <label>Tinggi dinding (m)
+          <input id="bata-tinggi-dinding" type="number" min="0" step="0.01" value="3">
+        </label>
+        <label>Luas pintu dan jendela (m²)
+          <input id="bata-bukaan" type="number" min="0" step="0.1" value="0">
+        </label>
+        <label>Panjang bata (cm)
+          <input id="bata-panjang" type="number" min="0" step="0.5" value="20">
+        </label>
+        <label>Tinggi bata (cm)
+          <input id="bata-tinggi" type="number" min="0" step="0.5" value="5">
+        </label>
+        <label>Tebal siar (cm)
+          <input id="bata-siar" type="number" min="0" step="0.1" value="1.5">
+        </label>
+        <label>Cadangan (%)
+          <input id="bata-cadangan" type="number" min="0" step="1" value="5">
+        </label>
+      </div>
+      <output id="hasil-bata"></output>
+      <p class="catatan">Untuk bata ringan, isi misalnya 60 × 20 cm dengan siar 0,3 cm.</p>
+    </section>
+
+    <section>
+      <h3>Besi tulangan</h3>
+      <div class="grid">
+        <label>Diameter (mm)
+          <input id="besi-diameter" type="number" min="0" step="1" value="10">
+        </label>
+        <label>Panjang per potong (m)
+          <input id="besi-panjang-potong" type="number" min="0" step="0.01" value="3">
+        </label>
+        <label>Jumlah potong
+          <input id="besi-jumlah" type="number" min="1" step="1" value="20">
+        </label>
+        <label>Panjang batang (m)
+          <input id="besi-panjang-batang" type="number" min="0" step="0.5" value="12">
+        </label>
+      </div>
+      <output id="hasil-besi"></output>
+      <p class="catatan">Panjang per potong sudah termasuk kait, tekukan, dan sambungan lewatan.</p>
+    </section>
+
+    <h2 id="arsitektur">Arsitektur</h2>
+
+    <section>
+      <h3>Tangga</h3>
+      <div class="grid">
+        <label>Tinggi antarlantai (cm)
+          <input id="tangga-tinggi" type="number" min="0" step="1" value="320">
+        </label>
+        <label>Tanjakan maksimum (cm)
+          <input id="tangga-tanjakan-maks" type="number" min="0" step="0.5" value="18">
+        </label>
+        <label>Lebar injakan (cm)
+          <input id="tangga-injakan" type="number" min="0" step="0.5" value="28">
+        </label>
+      </div>
+      <output id="hasil-tangga"></output>
+      <p class="catatan">Tanjakan = optrede (O), injakan = antrede (A). Tangga lurus tanpa bordes.</p>
+    </section>
+
+    <section>
+      <h3>KDB dan KLB</h3>
+      <div class="grid">
+        <label>Luas lahan (m²)
+          <input id="lahan-luas" type="number" min="0" step="1" value="200">
+        </label>
+        <label>Luas lantai dasar (m²)
+          <input id="lahan-dasar" type="number" min="0" step="1" value="110">
+        </label>
+        <label>Luas seluruh lantai (m²)
+          <input id="lahan-total" type="number" min="0" step="1" value="200">
+        </label>
+        <label>Batas KDB (%)
+          <input id="lahan-kdb-maks" type="number" min="0" step="1" value="60">
+        </label>
+        <label>Batas KLB
+          <input id="lahan-klb-maks" type="number" min="0" step="0.1" value="1.2">
+        </label>
+      </div>
+      <output id="hasil-lahan"></output>
+      <p class="catatan">Batas KDB dan KLB berbeda tiap zona. Isi sesuai peraturan tata ruang setempat.</p>
+    </section>
+
+    <footer>Hasil berupa perkiraan. Cocokkan dengan kondisi lapangan, data teknis produk, dan peraturan yang berlaku.</footer>
   </main>
 
   <script src="kalkulator.js"></script>
   <script>
     const ambil = (id) => Number(document.getElementById(id).value);
-    const format = (angka) =>
-      angka.toLocaleString("id-ID", { maximumFractionDigits: 2 });
+    const format = (angka, desimal = 2) =>
+      angka.toLocaleString("id-ID", { maximumFractionDigits: desimal });
+    const keterangan = (memenuhi) => (memenuhi ? "memenuhi" : "melebihi batas");
 
     function tampilkan(id, buatTeks) {
       const el = document.getElementById(id);
@@ -161,6 +319,76 @@
         });
         return `Luas dinding ${format(hasil.luasDinding)} m²: ` +
           `${format(hasil.liter)} liter cat`;
+      });
+
+      tampilkan("hasil-beton", () => {
+        const hasil = hitungBeton({
+          panjang: ambil("beton-panjang"),
+          lebar: ambil("beton-lebar"),
+          tebal: ambil("beton-tebal"),
+          jumlah: ambil("beton-jumlah"),
+          campuran: {
+            semen: ambil("beton-semen"),
+            pasir: ambil("beton-pasir"),
+            kerikil: ambil("beton-kerikil"),
+          },
+          beratSak: ambil("beton-sak"),
+          cadanganPersen: ambil("beton-cadangan"),
+        });
+        return `Volume beton ${format(hasil.volume, 3)} m³\n` +
+          `Semen ${format(hasil.semenSak)} sak · pasir ${format(hasil.pasirM3)} m³ · ` +
+          `kerikil ${format(hasil.kerikilM3)} m³`;
+      });
+
+      tampilkan("hasil-bata", () => {
+        const hasil = hitungBata({
+          panjangDinding: ambil("bata-panjang-dinding"),
+          tinggiDinding: ambil("bata-tinggi-dinding"),
+          luasBukaan: ambil("bata-bukaan"),
+          panjangBataCm: ambil("bata-panjang"),
+          tinggiBataCm: ambil("bata-tinggi"),
+          tebalSiarCm: ambil("bata-siar"),
+          cadanganPersen: ambil("bata-cadangan"),
+        });
+        return `Luas dinding ${format(hasil.luasDinding)} m² ` +
+          `(${format(hasil.bataPerM2, 1)} bata per m²): ${format(hasil.jumlahBata)} bata`;
+      });
+
+      tampilkan("hasil-besi", () => {
+        const hasil = hitungBesi({
+          diameterMm: ambil("besi-diameter"),
+          panjangPotong: ambil("besi-panjang-potong"),
+          jumlahPotong: ambil("besi-jumlah"),
+          panjangBatang: ambil("besi-panjang-batang"),
+        });
+        return `Berat ${format(hasil.beratPerMeter, 3)} kg/m · ` +
+          `total ${format(hasil.totalPanjang)} m · ${format(hasil.beratTotal)} kg\n` +
+          `Beli ${format(hasil.jumlahBatang)} batang`;
+      });
+
+      tampilkan("hasil-tangga", () => {
+        const hasil = hitungTangga({
+          tinggiLantaiCm: ambil("tangga-tinggi"),
+          tanjakanMaksCm: ambil("tangga-tanjakan-maks"),
+          lebarInjakanCm: ambil("tangga-injakan"),
+        });
+        return `${format(hasil.jumlahTanjakan)} tanjakan setinggi ${format(hasil.tinggiTanjakanCm)} cm, ` +
+          `${format(hasil.jumlahInjakan)} injakan\n` +
+          `Panjang datar ${format(hasil.panjangDatarM)} m · kemiringan ${format(hasil.sudutDerajat, 1)}°\n` +
+          `2O + A = ${format(hasil.nilaiLangkahCm, 1)} cm ` +
+          `(${hasil.nyaman ? "nyaman" : "di luar rentang nyaman"}, acuan 60–65 cm)`;
+      });
+
+      tampilkan("hasil-lahan", () => {
+        const hasil = hitungKdbKlb({
+          luasLahan: ambil("lahan-luas"),
+          luasLantaiDasar: ambil("lahan-dasar"),
+          luasTotalLantai: ambil("lahan-total"),
+          kdbMaksPersen: ambil("lahan-kdb-maks"),
+          klbMaks: ambil("lahan-klb-maks"),
+        });
+        return `KDB ${format(hasil.kdbPersen, 1)}% (${keterangan(hasil.memenuhiKdb)})\n` +
+          `KLB ${format(hasil.klb)} (${keterangan(hasil.memenuhiKlb)})`;
       });
     }
 
