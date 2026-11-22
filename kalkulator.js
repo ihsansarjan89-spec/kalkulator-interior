@@ -33,6 +33,12 @@ function bulatkanKeBawah(nilai) {
   return Math.floor(Number(nilai.toFixed(6)));
 }
 
+// Membuang galat pecahan biner (6 desimal) TANPA membulatkan ke angka tampilan.
+// Dipakai untuk pemeriksaan batas, supaya 60,04 tidak lolos batas 60.
+function normalisasi(nilai) {
+  return Number(nilai.toFixed(6));
+}
+
 function bulatkan(nilai, desimal = 0) {
   const faktor = 10 ** desimal;
   return Math.round(Number((nilai * faktor).toFixed(6))) / faktor;
@@ -208,7 +214,8 @@ function hitungTangga({
   const jumlahTanjakan = bulatkanKeAtas(tinggiLantaiCm / tanjakanMaksCm);
   const tinggiTanjakan = tinggiLantaiCm / jumlahTanjakan;
   const jumlahInjakan = jumlahTanjakan - 1;
-  const nilaiLangkah = bulatkan(2 * tinggiTanjakan + lebarInjakanCm, 1);
+  const nilaiLangkahMentah = normalisasi(2 * tinggiTanjakan + lebarInjakanCm);
+  const nilaiLangkah = bulatkan(nilaiLangkahMentah, 1);
   const sudut = (Math.atan(tinggiTanjakan / lebarInjakanCm) * 180) / Math.PI;
 
   return {
@@ -217,7 +224,9 @@ function hitungTangga({
     jumlahInjakan,
     panjangDatarM: bulatkan((jumlahInjakan * lebarInjakanCm) / 100, 2),
     nilaiLangkahCm: nilaiLangkah,
-    nyaman: nilaiLangkah >= LANGKAH_MIN_CM && nilaiLangkah <= LANGKAH_MAKS_CM,
+    nyaman:
+      nilaiLangkahMentah >= LANGKAH_MIN_CM &&
+      nilaiLangkahMentah <= LANGKAH_MAKS_CM,
     sudutDerajat: bulatkan(sudut, 1),
   };
 }
@@ -245,14 +254,15 @@ function hitungKdbKlb({
     );
   }
 
-  const kdbPersen = bulatkan((luasLantaiDasar / luasLahan) * 100, 1);
-  const klb = bulatkan(luasTotalLantai / luasLahan, 2);
+  // Batas diperiksa dengan nilai mentah; pembulatan hanya untuk tampilan.
+  const kdbMentah = normalisasi((luasLantaiDasar / luasLahan) * 100);
+  const klbMentah = normalisasi(luasTotalLantai / luasLahan);
 
   return {
-    kdbPersen,
-    klb,
-    memenuhiKdb: kdbPersen <= kdbMaksPersen,
-    memenuhiKlb: klb <= klbMaks,
+    kdbPersen: bulatkan(kdbMentah, 1),
+    klb: bulatkan(klbMentah, 2),
+    memenuhiKdb: kdbMentah <= kdbMaksPersen,
+    memenuhiKlb: klbMentah <= klbMaks,
   };
 }
 

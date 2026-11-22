@@ -270,3 +270,43 @@ test("KDB dan KLB: menolak luas yang tidak masuk akal", () => {
     /lebih kecil dari luas lantai dasar/
   );
 });
+
+test("KDB dan KLB: sedikit di atas batas tidak lolos karena pembulatan", () => {
+  // 60,04% dibulatkan tampilan menjadi 60,0 tetapi tetap melebihi batas 60%.
+  const hasil = hitungKdbKlb({
+    luasLahan: 100,
+    luasLantaiDasar: 60.04,
+    luasTotalLantai: 120.4,
+    kdbMaksPersen: 60,
+    klbMaks: 1.2,
+  });
+  assert.equal(hasil.kdbPersen, 60);
+  assert.equal(hasil.klb, 1.2);
+  assert.equal(hasil.memenuhiKdb, false);
+  assert.equal(hasil.memenuhiKlb, false);
+});
+
+test("KDB dan KLB: galat pecahan biner tidak membuat nilai pas jadi melebihi batas", () => {
+  // 3,5 / 50 * 100 = 7.000000000000001 dalam angka pecahan biner.
+  const hasil = hitungKdbKlb({
+    luasLahan: 50,
+    luasLantaiDasar: 3.5,
+    luasTotalLantai: 60,
+    kdbMaksPersen: 7,
+    klbMaks: 1.2,
+  });
+  assert.equal(hasil.memenuhiKdb, true);
+  assert.equal(hasil.memenuhiKlb, true);
+});
+
+test("tangga: rumus langkah sedikit di atas 65 cm tidak lolos karena pembulatan", () => {
+  // 18 tanjakan x 16,667 cm: 2 x 16,667 + 31,71 = 65,043 (tampil 65,0).
+  const hasil = hitungTangga({
+    tinggiLantaiCm: 300,
+    tanjakanMaksCm: 17.5,
+    lebarInjakanCm: 31.71,
+  });
+  assert.equal(hasil.jumlahTanjakan, 18);
+  assert.equal(hasil.nilaiLangkahCm, 65);
+  assert.equal(hasil.nyaman, false);
+});

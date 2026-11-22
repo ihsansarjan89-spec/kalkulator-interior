@@ -49,7 +49,7 @@ Rumusnya ada di `kalkulator.js`.
 - **Beton** dihitung dari perbandingan volume dengan faktor volume kering 1,54. Ini perkiraan pembelian bahan, bukan pengganti mix design atau mutu beton yang disyaratkan untuk struktur.
 - **Besi tulangan** hanya menghitung berat dan jumlah batang. Panjang per potong harus sudah termasuk kait, tekukan, dan sambungan lewatan. Kalkulator ini tidak menghitung kekuatan struktur.
 - **Tangga** dianggap lurus tanpa bordes.
-- **KDB dan KLB** dibandingkan dengan batas yang Anda isi sendiri, karena batasnya berbeda tiap zona.
+- **KDB dan KLB** dibandingkan dengan batas yang Anda isi sendiri, karena batasnya berbeda tiap zona. Pemeriksaan memakai nilai sebelum dibulatkan, jadi 60,04% tidak lolos batas 60% walaupun tampil 60,0%. Hal yang sama berlaku untuk rumus langkah tangga.
 
 Hasil berupa perkiraan. Cocokkan dengan kondisi lapangan, data teknis produk, dan peraturan yang berlaku.
 
