@@ -4,7 +4,8 @@ on:
     branches: [publish/sta-arsitek-v4.8]
   workflow_dispatch:
 permissions:
-  contents: read`n  actions: read
+  contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -28,5 +29,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-
-
