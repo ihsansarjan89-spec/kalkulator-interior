@@ -1,173 +1,1112 @@
-<!doctype html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kalkulator Interior</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinar Tata Arsitektur | Arsitektur, Rumah, Villa & Civil Building</title>
+  <meta name="description" content="Sinar Tata Arsitektur melayani perencanaan rumah dan villa, desain arsitektur, survei, rekayasa sipil, struktur, MEP, serta pendampingan proyek bangunan.">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/sta-icon.png">
   <style>
-    :root {
-      --latar: #f6f4f0;
-      --kartu: #ffffff;
-      --teks: #26221d;
-      --redup: #6b645b;
-      --garis: #ddd7cd;
-      --aksen: #8a5a2b;
-      --galat: #b3261e;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 24px 16px 48px;
-      background: var(--latar);
-      color: var(--teks);
-      font: 16px/1.5 system-ui, "Segoe UI", sans-serif;
-    }
-    main { max-width: 640px; margin: 0 auto; }
-    h1 { margin: 0 0 4px; font-size: 1.6rem; }
-    h2 { margin: 0 0 12px; font-size: 1.05rem; color: var(--aksen); }
-    .intro { margin: 0 0 20px; color: var(--redup); }
-    section {
-      margin-bottom: 16px;
-      padding: 16px;
-      background: var(--kartu);
-      border: 1px solid var(--garis);
-      border-radius: 10px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-    }
-    label { display: block; font-size: 0.85rem; color: var(--redup); }
-    input {
-      display: block;
-      width: 100%;
-      margin-top: 4px;
-      padding: 8px 10px;
-      border: 1px solid var(--garis);
-      border-radius: 6px;
-      font: inherit;
-      color: var(--teks);
-    }
-    input:focus { outline: 2px solid var(--aksen); outline-offset: 1px; }
-    output {
-      display: block;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--garis);
-      font-weight: 600;
-    }
-    output.galat { color: var(--galat); font-weight: 400; }
-    footer { color: var(--redup); font-size: 0.8rem; }
-  </style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF9F6; color: #1C1C1A; }
+    h1, h2, h3, .font-serif-display { font-family: 'Cormorant Garamond', serif; }
+    .hero-slide { transition: opacity 1.2s ease-in-out, transform 8s ease-out; }
+    .glass-nav { background: rgba(250, 249, 246, 0.88); backdrop-filter: blur(12px); }
+  /* katalog */
+.kat-tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0 1.4rem}
+.kat-tabs button{font:500 .95rem/1 var(--display,serif);letter-spacing:.02em;padding:.85rem 1.3rem;border:1px solid rgba(17,24,39,.22);background:transparent;color:#111827;border-radius:999px;cursor:pointer}
+.kat-tabs button[aria-selected="true"]{background:#1550C0;border-color:#1550C0;color:#FAFAFA}
+.kat-tabs button:focus-visible,.kat-item summary:focus-visible{outline:2px solid #1550C0;outline-offset:3px}
+.kat-panel[hidden]{display:none}
+.kat-list{display:grid;gap:10px;margin:0 0 2rem}
+.kat-item{background:#fff;border:1px solid rgba(17,24,39,.12);border-radius:14px;overflow:hidden}
+.kat-item summary{list-style:none;cursor:pointer;padding:1.1rem 1.3rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font:500 1.15rem/1.3 var(--display,serif);color:#111827}
+.kat-item summary::-webkit-details-marker{display:none}
+.kat-item summary::after{content:"+";font:400 1.4rem/1 var(--sans,sans-serif);color:#1550C0;transition:transform .2s}
+.kat-item[open] summary::after{content:"–"}
+.kat-isi{padding:0 1.3rem 1.3rem;color:#374151;font-size:.95rem;line-height:1.6}
+.kat-isi p{margin:0 0 1rem}
+.kat-foto{margin:0 0 1rem;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.kat-foto figure{margin:0}
+.kat-foto img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block}
+.kat-foto figcaption{font-size:.8rem;color:#6b645c;margin-top:.35rem;line-height:1.4}
+.kat-kosong{font-size:.85rem;color:#1550C0;background:#FAFAFA;border-radius:10px;padding:.6rem .8rem;margin:0 0 1rem}
+.kalk{background:#1550C0;color:#FAFAFA;border-radius:16px;padding:1.5rem;margin:0 0 1rem}
+.kalk h3{font:500 1.35rem/1.2 var(--display,serif);margin:0 0 .3rem;color:#FAFAFA}
+.kalk>p{margin:0 0 1rem;font-size:.9rem;color:#E5E7EB;line-height:1.5}
+.kalk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.kalk label{display:grid;gap:.35rem;font-size:.85rem;color:#E5E7EB}
+.kalk input,.kalk select{font:inherit;font-size:1rem;padding:.6rem .7rem;border-radius:8px;border:1px solid rgba(250,250,250,.3);background:#1550C0;color:#FAFAFA;width:100%;box-sizing:border-box}
+.kalk input:focus-visible,.kalk select:focus-visible{outline:2px solid #1550C0}
+.kalk-hasil{margin-top:1rem;background:#1550C0;border-radius:10px;padding:1rem;font-size:.95rem;line-height:1.7}
+.kalk-hasil b{color:#FAFAFA;font-weight:600}
+.kalk-hasil .peringatan{color:#FFFFFF;font-size:.85rem;margin-top:.6rem}
+@media (max-width:640px){.kalk-grid,.kat-foto{grid-template-columns:1fr}}
+
+/* gabungan: dasar untuk katalog dan tim */
+:root{--body:"Plus Jakarta Sans","Inter",system-ui,sans-serif;--display:"Plus Jakarta Sans","Inter",system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+.kepala{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end;margin-bottom:1.6rem}
+.kepala p{margin:0;color:#374151;line-height:1.6}
+.eyebrow{display:block;font:600 .75rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#1550C0}
+#katalog,#tim{padding:6rem 0;background:#FAFAFA}
+#katalog h2,#tim h2{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.02em;color:#111827;margin-top:.9rem}
+#katalog h3,#tim h3{font-family:var(--display)}
+@media (max-width:860px){.kepala{grid-template-columns:1fr}}
+.tim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:2rem}
+.tim-card{border:1px dashed rgba(138,78,43,.45);border-radius:16px;padding:1.4rem;background:#fff}
+.tim-card .foto{aspect-ratio:4/3;border-radius:10px;background:#EADFCB;margin-bottom:1rem}
+.tim-card b{display:block;font:500 1.15rem/1.2 var(--display);color:#111827}
+.tim-card small{color:#8A4E2B;font-size:.85rem}
+@media (max-width:860px){.tim-grid{grid-template-columns:1fr}}
+</style>
 </head>
-<body>
-  <main>
-    <h1>Kalkulator Interior</h1>
-    <p class="intro">Perkiraan kebutuhan keramik lantai dan cat dinding untuk satu ruangan.</p>
+<body class="antialiased selection:bg-stone-800 selection:text-stone-100">
 
-    <section>
-      <h2>Ukuran ruangan</h2>
-      <div class="grid">
-        <label>Panjang (m)
-          <input id="panjang" type="number" min="0" step="0.01" value="4">
-        </label>
-        <label>Lebar (m)
-          <input id="lebar" type="number" min="0" step="0.01" value="3">
-        </label>
-        <label>Tinggi dinding (m)
-          <input id="tinggi" type="number" min="0" step="0.01" value="3">
-        </label>
+  <!-- NAVBAR -->
+  <header class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-stone-200/70 transition-all">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#home" class="flex items-center" aria-label="Sinar Tata Arsitektur - Beranda">
+        <img src="img/sta-logo.png" alt="Logo Sinar Tata Arsitektur" class="h-14 w-auto max-w-[210px] object-contain" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-xs tracking-[0.18em] uppercase font-medium text-stone-600">
+        <a href="#home" class="hover:text-stone-950 transition">Beranda</a>
+        <a href="#tentang" class="hover:text-stone-950 transition">Filosofi</a>
+        <a href="#katalog" class="hover:text-stone-950 transition">Katalog</a>
+        <a href="#portofolio" class="hover:text-stone-950 transition">Pengalaman</a>
+        <a href="#konsep" class="hover:text-stone-950 transition">Konsep Desain</a>
+        <a href="#layanan" class="hover:text-stone-950 transition">Layanan & Estimasi</a><a href="#survei" class="hover:text-stone-950 transition">Survei</a>
+        <a href="#konsultasi" class="px-5 py-2.5 bg-stone-900 text-stone-50 hover:bg-stone-700 transition">Konsultasi</a>
+      </nav>
+    <a href="mailto:Sinartataarsitek@gmail.com" class="ml-4 flex items-center gap-2 shrink-0 group" aria-label="Kirim email ke STA Arsitek: Sinartataarsitek@gmail.com"><img src="img/qr-email-sta.png" alt="QR Code email STA Arsitek" class="w-12 h-12 border border-stone-300 p-0.5 bg-white object-contain" /><span class="hidden xl:block text-[10px] leading-tight text-stone-600"><strong class="block text-stone-900 tracking-wider">EMAIL STUDIO</strong>Sinartataarsitek@gmail.com</span></a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION: GRIYA & SAMARA SHOWCASE -->
+  <section id="home" class="relative h-screen min-h-[650px] w-full overflow-hidden bg-stone-950">
+    <!-- Slide dokumentasi lapangan -->
+    <div id="slide-0" class="hero-slide absolute inset-0 opacity-100 scale-100">
+      <img src="img/hero-1-survei.jpg" alt="Tim meninjau lahan perbukitan pesisir" class="w-full h-full object-cover opacity-65" />
+    </div>
+    <div id="slide-1" class="hero-slide absolute inset-0 opacity-0 scale-105">
+      <img src="img/hero-2-tinjau.jpg" alt="Peninjauan lahan bersama pemilik proyek" class="w-full h-full object-cover opacity-65" loading="lazy" />
+    </div>
+    <div id="slide-2" class="hero-slide absolute inset-0 opacity-0 scale-105">
+      <img src="img/hero-3-jalan-agregat.jpg" alt="Jalan lapis agregat di lahan terasering" class="w-full h-full object-cover opacity-65" loading="lazy" />
+    </div>
+    <div id="slide-3" class="hero-slide absolute inset-0 opacity-0 scale-105">
+      <img src="img/hero-4-villa.jpg" alt="Bangunan villa tahap akhir pekerjaan" class="w-full h-full object-cover opacity-65" loading="lazy" />
+    </div>
+    <div id="slide-4" class="hero-slide absolute inset-0 opacity-0 scale-105">
+      <img src="img/hero-5-pltmh.jpg" alt="Ruang turbin dan panel kontrol pembangkit" class="w-full h-full object-cover opacity-65" loading="lazy" />
+    </div>
+
+    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/35 to-stone-950/30"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-20 md:pb-24">
+      <p class="text-xs md:text-sm tracking-[0.35em] uppercase text-stone-300 mb-3">A Journey in Every Design</p>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-semibold text-white max-w-4xl leading-[1.08]">
+        Merancang Ruang Hidup yang Ikonik, Presisi, dan Berkarakter.
+      </h1>
+      <p class="mt-5 text-stone-300 max-w-xl text-sm md:text-base font-light leading-relaxed">
+        Dari kehangatan arsitektur hunian modern tropis seperti <strong class="text-white font-medium">Griya</strong> (render) dan <strong class="text-white font-medium">Samara</strong> hingga ketangguhan rekayasa infrastruktur skala besar.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a href="#portofolio" class="px-7 py-3.5 bg-white text-stone-950 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-stone-200 transition">
+          Eksplorasi Karya
+        </a>
+        <a href="#konsultasi" class="px-7 py-3.5 border border-white/50 text-white text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition">
+          Jadwalkan Konsultasi
+        </a>
       </div>
-    </section>
 
-    <section>
-      <h2>Keramik lantai</h2>
-      <div class="grid">
-        <label>Panjang keramik (cm)
-          <input id="panjang-keramik" type="number" min="0" step="1" value="60">
-        </label>
-        <label>Lebar keramik (cm)
-          <input id="lebar-keramik" type="number" min="0" step="1" value="60">
-        </label>
-        <label>Isi per dus (keping)
-          <input id="isi-dus" type="number" min="1" step="1" value="4">
-        </label>
-        <label>Cadangan potongan (%)
-          <input id="cadangan" type="number" min="0" step="1" value="10">
-        </label>
+      <!-- Slider Controls -->
+      <div class="mt-12 flex items-center justify-between border-t border-white/20 pt-5 text-xs text-stone-300">
+        <div id="slide-caption" class="tracking-widest uppercase">01 / SURVEI LAHAN PERBUKITAN</div>
+        <div class="flex gap-3">
+          <button onclick="setSlide(0)" class="w-8 h-1 bg-white transition" id="dot-0" aria-label="Foto 1"></button>
+          <button onclick="setSlide(1)" class="w-8 h-1 bg-white/30 transition" id="dot-1" aria-label="Foto 2"></button>
+          <button onclick="setSlide(2)" class="w-8 h-1 bg-white/30 transition" id="dot-2" aria-label="Foto 3"></button>
+          <button onclick="setSlide(3)" class="w-8 h-1 bg-white/30 transition" id="dot-3" aria-label="Foto 4"></button>
+          <button onclick="setSlide(4)" class="w-8 h-1 bg-white/30 transition" id="dot-4" aria-label="Foto 5"></button>
+        </div>
       </div>
-      <output id="hasil-keramik"></output>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>Cat dinding</h2>
-      <div class="grid">
-        <label>Luas pintu dan jendela (m²)
-          <input id="bukaan" type="number" min="0" step="0.1" value="3.5">
-        </label>
-        <label>Jumlah lapis
-          <input id="lapis" type="number" min="1" step="1" value="2">
-        </label>
-        <label>Daya sebar (m² per liter)
-          <input id="daya-sebar" type="number" min="1" step="0.5" value="10">
-        </label>
+  <!-- METRIK KREDIBILITAS (Gaya Lumbung Architect) -->
+  <section class="bg-stone-900 text-stone-100 py-14 border-b border-stone-800">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="font-serif-display text-[1.75rem] sm:text-4xl md:text-5xl font-semibold text-amber-200/90">Mengutamakan</div>
+        <div class="mt-2 text-xs tracking-[0.2em] uppercase text-stone-400">Presisi Struktur & Estetika</div>
       </div>
-      <output id="hasil-cat"></output>
-    </section>
+      <div>
+        <div class="font-serif-display text-4xl md:text-5xl font-semibold text-amber-200/90">2 Divisi</div>
+        <div class="mt-2 text-xs tracking-[0.2em] uppercase text-stone-400">Villa & Infrastruktur Sipil</div>
+      </div>
+      <div>
+        <div class="font-serif-display text-4xl md:text-5xl font-semibold text-amber-200/90">End-to-End</div>
+        <div class="mt-2 text-xs tracking-[0.2em] uppercase text-stone-400">Konsep, RAB hingga Konstruksi</div>
+      </div>
+      <div>
+        <div class="font-serif-display text-4xl md:text-5xl font-semibold text-amber-200/90">Bespoke</div>
+        <div class="mt-2 text-xs tracking-[0.2em] uppercase text-stone-400">Desain Eksklusif Sesuai Lahan</div>
+      </div>
+    </div>
+  </section>
 
-    <footer>Hasil berupa perkiraan. Cocokkan dengan kondisi lapangan dan data teknis produk.</footer>
-  </main>
+  <!-- FILOSOFI & PENDEKATAN -->
+  <section id="tentang" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-6">
+        <span class="text-xs tracking-[0.3em] uppercase text-stone-500">Filosofi Studio</span>
+        <h2 class="mt-3 text-4xl md:text-5xl font-semibold leading-tight text-stone-900">Setiap Ruang Berawal dari Cerita Penghuninya.</h2>
+        <p class="mt-6 text-stone-600 leading-relaxed text-sm md:text-base">Sinar Tata Arsitektur percaya bahwa setiap bangunan yang baik berawal dari cerita, kebutuhan, dan harapan orang yang akan menggunakannya.</p>
+        <p class="mt-4 text-stone-600 leading-relaxed text-sm md:text-base">Kami senang mendengarkan gagasan Anda, memahami cara keluarga menjalani keseharian, lalu mengolahnya menjadi ruang yang terasa nyaman, memiliki karakter, dan selaras dengan lingkungan tropis.</p>
+        <p class="mt-4 text-stone-600 leading-relaxed text-sm md:text-base">Dari rumah tinggal dan villa yang dirancang untuk menjadi tempat beristirahat, hingga bangunan dengan kebutuhan struktur yang lebih kompleks, kami memadukan kepekaan desain dengan pengalaman teknis di lapangan. Setiap keputusan direncanakan dengan cermat, agar keindahan tidak mengesampingkan kenyamanan, keamanan, dan ketahanan bangunan.</p>
+        <p class="mt-4 text-stone-600 leading-relaxed text-sm md:text-base">Bagi kami, proyek yang berhasil bukan hanya bangunan yang selesai dibangun, tetapi bangunan yang benar-benar menjawab kebutuhan pemiliknya.</p>
+      </div>
+      <div class="md:col-span-6">
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <figure class="min-w-0">
+            <img src="img/filosofi-diskusi.jpg" alt="Diskusi dan koordinasi proyek bersama pihak terkait" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+            <figcaption class="mt-2 text-xs text-stone-500 leading-relaxed">Diskusi dan koordinasi sebelum perencanaan.</figcaption>
+          </figure>
+          <figure class="min-w-0">
+            <img src="img/filosofi-tinjau-lahan.jpg" alt="Peninjauan lokasi bersama tim proyek" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+            <figcaption class="mt-2 text-xs text-stone-500 leading-relaxed">Peninjauan kondisi lahan di lapangan.</figcaption>
+          </figure>
+        </div>
+        <div class="bg-stone-100 border border-stone-200 p-8 md:p-10">
+          <span class="text-xs tracking-[0.25em] uppercase text-stone-500">Cara Kami Bekerja</span>
+          <div class="mt-7 space-y-6">
+            <div><span class="text-amber-800 text-xs tracking-widest">01</span><h3 class="mt-1 text-2xl text-stone-900">Mendengarkan</h3><p class="mt-1 text-sm text-stone-600">Memahami kebutuhan, kebiasaan, dan prioritas pemilik sejak awal.</p></div>
+            <div><span class="text-amber-800 text-xs tracking-widest">02</span><h3 class="mt-1 text-2xl text-stone-900">Merencanakan</h3><p class="mt-1 text-sm text-stone-600">Menyatukan gagasan desain dengan kondisi lahan dan pertimbangan teknis.</p></div>
+            <div><span class="text-amber-800 text-xs tracking-widest">03</span><h3 class="mt-1 text-2xl text-stone-900">Mewujudkan</h3><p class="mt-1 text-sm text-stone-600">Menjaga agar keputusan desain tetap berpijak pada kenyamanan, keamanan, dan ketahanan.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- KONSEP DESAIN: 8 GAYA RUMAH & VILLA -->
+  <section id="konsep" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="max-w-2xl mb-14">
+      <span class="text-xs tracking-[0.3em] uppercase text-stone-500">Konsep Desain</span>
+      <h2 class="mt-2 text-4xl md:text-5xl font-semibold text-stone-900">8 Konsep Rumah & Villa untuk Lombok</h2>
+      <p class="mt-4 text-sm text-stone-600 leading-relaxed">Setiap gaya punya syarat wajib agar hasilnya benar, dan penyesuaian agar tahan iklim tropis, gempa, dan udara pesisir NTB. Gambar adalah foto ilustrasi gaya, bukan proyek kami.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-01.jpg" alt="Ilustrasi gaya minimalis" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">01</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Minimalis</h3><p class="text-xs text-stone-500 mt-1">Efisien, bersih, fungsional.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Denah terbuka, sekat seminimal mungkin</li><li>• Bentuk geometris tegas, fasad bersih</li><li>• Bukaan kaca lebar dan lemari tanam</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Bukaan sisi barat, utara, dan timur perlu peneduh. Atap dak miring minimal 2% dan wajib waterproofing.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Esensial – Nyaman</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-02.jpg" alt="Ilustrasi gaya tropis modern" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">02</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Tropis Modern</h3><p class="text-xs text-stone-500 mt-1">Paling cocok untuk iklim Lombok.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Ventilasi silang, bukaan saling berhadapan</li><li>• Teritisan atap lebar penahan hujan dan terik</li><li>• Plafon 3–3,5 m dengan ventilasi ruang atap</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Kayu ulin kini langka: pakai bengkirai, merbau, atau WPC. Di pesisir, semua besi dan baja ekspos digalvanis.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Nyaman – Premium</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-03.jpg" alt="Ilustrasi gaya industrial" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">03</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Industrial</h3><p class="text-xs text-stone-500 mt-1">Material mentah, karakter kuat.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Bata ekspos, lantai acian, rangka baja terlihat</li><li>• Lampu warm white untuk kesan hangat</li><li>• Ruang tinggi bergaya loft</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Acian dan bata ekspos wajib diberi coating agar tidak berdebu dan berjamur. Dekat pantai, baja ekspos wajib anti-karat.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Nyaman</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-04.jpg" alt="Ilustrasi gaya Skandinavia" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">04</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Skandinavia</h3><p class="text-xs text-stone-500 mt-1">Terang, hangat, fungsional.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Dominan putih dan warna terang</li><li>• Aksen kayu berwarna cerah</li><li>• Tekstil nyaman dan tanaman hijau</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Ganti karpet wol dengan linen, katun, dan rotan. Hindari lokasi berdebu atau bertanah merah: dinding putih cepat kotor.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Nyaman</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-05.jpg" alt="Ilustrasi gaya klasik Mediterania" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">05</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Klasik / Mediterania</h3><p class="text-xs text-stone-500 mt-1">Megah, simetris, elegan.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Fasad simetris dengan pilar besar</li><li>• Genteng tanah liat dan plester tebal</li><li>• Pintu dan jendela lengkung</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Zona gempa tinggi: atap dan ornamen berat wajib dihitung struktur. Ornamen luar pakai GRC agar tidak retak dan berlumut.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Premium / Villa</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-06.jpg" alt="Ilustrasi gaya Japandi" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">06</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Japandi / Zen</h3><p class="text-xs text-stone-500 mt-1">Tenang, alami, menyatu dengan taman.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Pintu geser lebar menghadap taman</li><li>• Kayu, bambu, batu, dan warna netral</li><li>• Ruang lapang tanpa barang berlebih</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Pintu shoji kertas tidak tahan lembap: pakai kaca buram. Kolam wajib kedap air dan bersirkulasi agar bebas nyamuk.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Nyaman – Premium</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-07.jpg" alt="Ilustrasi gaya Bohemian" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">07</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Bohemian</h3><p class="text-xs text-stone-500 mt-1">Ekspresif, artistik, penuh cerita.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Motif etnik dan tekstil berlapis</li><li>• Rotan, macrame, dan tanaman gantung</li><li>• Furnitur antik atau etnik</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Pakai tenun, anyaman ketak, dan gerabah Banyumulek. Kain dan rotan butuh ventilasi baik agar tidak berjamur.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Nyaman</div>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 flex flex-col">
+        <img src="img/konsep-08.jpg" alt="Ilustrasi gaya kontemporer" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="p-5 flex flex-col gap-3 grow">
+          <div><span class="text-[11px] tracking-widest text-stone-400">08</span><h3 class="text-2xl font-semibold text-stone-900 leading-tight">Kontemporer</h3><p class="text-xs text-stone-500 mt-1">Dinamis, berani, berteknologi.</p></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Syarat wajib</div><ul class="mt-1.5 space-y-1 text-xs text-stone-700"><li>• Bentuk asimetris dan massa unik</li><li>• Kaca berinsulasi dan rumah pintar</li><li>• Kantilever beton/baja yang dihitung</li></ul></div>
+          <div><div class="text-[11px] tracking-widest uppercase text-stone-500">Penyesuaian Lombok</div><p class="mt-1.5 text-xs text-stone-700 leading-relaxed">Baja ringan hanya untuk rangka atap. Di lahan miring, pondasi dan dinding penahan tanah dihitung tenaga ahli.</p></div>
+          <div class="mt-auto pt-3 border-t border-stone-100 text-[11px] tracking-widest uppercase text-stone-500">Pilihan hunian: Premium / Villa</div>
+        </div>
+      </article>
+    </div>
+    <div class="mt-10 text-center"><a href="#konsultasi" class="inline-block px-7 py-3.5 bg-stone-900 text-stone-50 text-xs tracking-[0.2em] uppercase hover:bg-stone-700 transition">Konsultasikan Gaya Pilihan Anda</a></div>
+  </section>
 
-  <script src="kalkulator.js"></script>
+  <!-- TRANSPARANSI LAYANAN & PAKET (Gaya Mahira Architect) -->
+  <section id="layanan" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs tracking-[0.3em] uppercase text-stone-500">Lingkup Kerja</span>
+      <h2 class="mt-2 text-4xl md:text-5xl font-semibold text-stone-900">Paket Layanan Terintegrasi</h2>
+      <p class="mt-4 text-sm text-stone-600">Pilih layanan sesuai kebutuhan proyek Anda, mulai dari pengembangan konsep, dokumen perencanaan, hingga pelaksanaan konstruksi.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="border border-stone-200 bg-white p-8 flex flex-col justify-between">
+        <div>
+          <span class="text-xs tracking-widest uppercase text-stone-400">Tahap 01</span>
+          <h3 class="mt-2 text-2xl font-semibold text-stone-900">Desain Konsep & 3D Visual</h3>
+          <p class="mt-3 text-sm text-stone-600 leading-relaxed">Cocok untuk mematangkan tata ruang dan tampilan fasad sebelum melangkah ke tahap teknis.</p>
+          <ul class="mt-6 space-y-2.5 text-xs text-stone-700 border-t border-stone-100 pt-5">
+            <li>• Konsultasi Kebutuhan & Analisis Lahan</li>
+            <li>• Denah Tata Ruang (2D Floor Plan)</li>
+            <li>• Visualisasi Eksterior 3D Realistis</li>
+            <li>• Revisi Konsep Terarah</li>
+          </ul>
+        </div>
+        <a href="#konsultasi" class="mt-8 block text-center py-3 border border-stone-900 text-xs tracking-widest uppercase hover:bg-stone-900 hover:text-white transition">Tanya Estimasi</a>
+      </div>
+
+      <div class="border-2 border-stone-900 bg-stone-900 text-stone-100 p-8 flex flex-col justify-between shadow-xl">
+        <div>
+          <span class="text-xs tracking-widest uppercase text-amber-300">Paling Diminati</span>
+          <h3 class="mt-2 text-2xl font-semibold text-white">Arsitektur & DED</h3>
+          <p class="mt-3 text-sm text-stone-300 leading-relaxed">Paket dokumen perencanaan teknis dengan gambar kerja arsitektur, perhitungan struktur, MEP, dan Rencana Anggaran Biaya.</p>
+          <ul class="mt-6 space-y-2.5 text-xs text-stone-200 border-t border-stone-800 pt-5">
+            <li>• Semua Output Desain Konsep & 3D</li>
+            <li>• Gambar Kerja Teknis (DED Arsitektur)</li>
+            <li>• Gambar Struktur & MEP (Listrik/Air)</li>
+            <li>• Rencana Anggaran Biaya (RAB) Detail</li>
+          </ul>
+        </div>
+        <a href="#konsultasi" class="mt-8 block text-center py-3 bg-white text-stone-950 text-xs tracking-widest uppercase font-semibold hover:bg-stone-200 transition">Konsultasi Paket Ini</a>
+      </div>
+
+      <div class="border border-stone-200 bg-white p-8 flex flex-col justify-between">
+        <div>
+          <span class="text-xs tracking-widest uppercase text-stone-400">Tahap 03</span>
+          <h3 class="mt-2 text-2xl font-semibold text-stone-900">Design & Build</h3>
+          <p class="mt-3 text-sm text-stone-600 leading-relaxed">Perencanaan dan pelaksanaan pembangunan rumah secara terintegrasi berdasarkan kebutuhan, desain, dan spesifikasi proyek.</p>
+          <ul class="mt-6 space-y-2.5 text-xs text-stone-700 border-t border-stone-100 pt-5">
+            <li>• Pengembangan desain dan persiapan pelaksanaan</li>
+            <li>• Pengadaan material dan pelaksanaan konstruksi</li>
+            <li>• Pekerjaan arsitektur dan struktur sesuai lingkup</li>
+            <li>• Serah terima hasil pekerjaan</li>
+          </ul>
+        </div>
+        <a href="#konsultasi" class="mt-8 block text-center py-3 border border-stone-900 text-xs tracking-widest uppercase hover:bg-stone-900 hover:text-white transition">Diskusi Proyek</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAKET SURVEI LAHAN -->
+  <section id="survei" class="py-20 bg-stone-100/80 border-y border-stone-200">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl mb-12">
+        <span class="text-xs tracking-[0.3em] uppercase text-stone-500">Tahap Awal Perencanaan</span>
+        <h2 class="mt-2 text-4xl md:text-5xl font-semibold text-stone-900">Survei Lahan & Investigasi</h2>
+        <p class="mt-4 text-sm text-stone-600 leading-relaxed">Kebutuhan survei disesuaikan dengan kondisi lahan dan tingkat perencanaan. Pelaksanaan pengukuran lapangan didukung rekanan survei tetap yang bekerja bersama STA pada setiap proyek sesuai kebutuhan.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="bg-white border border-stone-200 overflow-hidden">
+          <img src="img/survei-principal.jpg" alt="Peninjauan lahan perbukitan sebagai survei awal" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+          <div class="p-7"><span class="text-xs tracking-widest text-stone-400">01</span><h3 class="mt-2 text-2xl text-stone-900">Survei Principal Lahan</h3><p class="mt-3 text-sm text-stone-600 leading-relaxed">Peninjauan awal oleh tenaga ahli, pengamatan kondisi tapak, serta pengukuran awal untuk memahami bentuk dan potensi lahan.</p><p class="mt-4 text-xs tracking-wide text-stone-500">Untuk kebutuhan Hunian Esensial.</p></div>
+        </article>
+        <article class="bg-white border border-stone-200 overflow-hidden">
+          <img src="img/survei-topografi.jpg" alt="Pengecekan elevasi dan kondisi permukaan lahan" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+          <div class="p-7"><span class="text-xs tracking-widest text-stone-400">02</span><h3 class="mt-2 text-2xl text-stone-900">Survei Terpadu</h3><p class="mt-3 text-sm text-stone-600 leading-relaxed">Pengukuran topografi menggunakan Total Station atau GNSS/RTK sesuai kondisi lokasi dan kebutuhan data perencanaan.</p><p class="mt-4 text-xs tracking-wide text-stone-500">Untuk kebutuhan Hunian Nyaman.</p></div>
+        </article>
+        <article class="bg-white border border-stone-200 overflow-hidden">
+          <img src="img/survei-geoteknik-core.jpeg" alt="Dokumentasi sampel inti hasil pengeboran tanah" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+          <div class="p-7"><span class="text-xs tracking-widest text-stone-400">03</span><h3 class="mt-2 text-2xl text-stone-900">Survei Terpadu & Investigasi Geoteknik</h3><p class="mt-3 text-sm text-stone-600 leading-relaxed">Survei topografi yang dipadukan dengan investigasi tanah, seperti CPT/sondir atau pengeboran dan bore log sesuai kebutuhan proyek.</p><p class="mt-4 text-xs tracking-wide text-stone-500">Untuk kebutuhan Hunian Premium.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- FORMULIR KONSULTASI CEPAT KE WHATSAPP (Gaya Mahira Architect) -->
+  <section id="konsultasi" class="py-24 bg-stone-900 text-stone-100">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-5">
+        <span class="text-xs tracking-[0.3em] uppercase text-amber-300">Mulai Proyek Anda</span>
+        <h2 class="mt-3 text-4xl md:text-5xl font-semibold text-white leading-tight">Diskusikan Proyek Anda Langsung dengan Ahlinya.</h2>
+        <p class="mt-5 text-sm text-stone-300 leading-relaxed">
+          Ceritakan rencana lahan, perkiraan luasan, dan gaya bangunan impian Anda. Tim Sinar Tata Arsitektur siap membantu merumuskan solusi terbaiknya.
+        </p>
+      </div>
+
+      <form onsubmit="kirimEmail(event)" class="md:col-span-7 bg-stone-950/70 border border-stone-800 p-8 space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] tracking-widest uppercase text-stone-400 mb-1.5">Nama Lengkap</label>
+            <input type="text" id="wa-nama" required placeholder="Contoh: Budi Santoso" class="w-full bg-stone-900 border border-stone-700 px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-300" />
+          </div>
+          <div>
+            <label class="block text-[11px] tracking-widest uppercase text-stone-400 mb-1.5">Alamat Email</label>
+            <input type="email" id="wa-hp" required placeholder="nama@email.com" class="w-full bg-stone-900 border border-stone-700 px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-300" />
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-[11px] tracking-widest uppercase text-stone-400 mb-1.5">Lokasi Lahan</label>
+            <input type="text" id="wa-lokasi" required placeholder="Kota / Kabupaten" class="w-full bg-stone-900 border border-stone-700 px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-300" />
+          </div>
+          <div>
+            <label class="block text-[11px] tracking-widest uppercase text-stone-400 mb-1.5">Estimasi Luas (m²)</label>
+            <input type="text" id="wa-luas" placeholder="Contoh: 250 m²" class="w-full bg-stone-900 border border-stone-700 px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-300" />
+          </div>
+          <div>
+            <label class="block text-[11px] tracking-widest uppercase text-stone-400 mb-1.5">Jenis Proyek</label>
+            <select id="wa-jenis" class="w-full bg-stone-900 border border-stone-700 px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-300">
+              <option value="Hunian / Rumah Tinggal">Hunian / Rumah</option>
+              <option value="Vila / Resort">Vila / Resort</option>
+              <option value="Komersial / Kantor">Komersial</option>
+              <option value="Infrastruktur / Sipil">Infrastruktur / Sipil</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="w-full py-4 bg-white text-stone-950 text-xs tracking-[0.25em] uppercase font-semibold hover:bg-amber-200 transition">
+          Kirim Permohonan via Email
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <section id="katalog">
+  <div class="wrap">
+    <div class="kepala">
+      <div><span class="eyebrow">Katalog layanan</span><h2>Pilih jenis pekerjaan, lihat contohnya, lalu hitung awalnya.</h2></div>
+      <p>Setiap jenis pekerjaan memuat daftar desain, contoh dari pengalaman kami, dan kalkulator teknik untuk perkiraan awal. Hasil kalkulator bukan penawaran dan harus diverifikasi sebelum dipakai.</p>
+    </div>
+
+    <div class="kat-tabs" role="tablist" aria-label="Kategori katalog">
+      <button type="button" role="tab" id="tab-rumah" aria-controls="kp-rumah" aria-selected="true">Rumah</button>
+      <button type="button" role="tab" id="tab-jalan" aria-controls="kp-jalan" aria-selected="false" tabindex="-1">Jalan</button>
+      <button type="button" role="tab" id="tab-air" aria-controls="kp-air" aria-selected="false" tabindex="-1">Bangunan air</button>
+      <button type="button" role="tab" id="tab-landscape" aria-controls="kp-landscape" aria-selected="false" tabindex="-1">Landscape</button>
+    </div>
+
+    <!-- RUMAH -->
+    <div class="kat-panel" id="kp-rumah" role="tabpanel" aria-labelledby="tab-rumah">
+      <div class="kat-list">
+        <details class="kat-item" open>
+          <summary>Rumah tinggal modern tropis</summary>
+          <div class="kat-isi">
+            <p>Dari denah dan tampak sampai render 3D. Bukaan silang dan atap miring untuk iklim Lombok.</p>
+            <div class="kat-foto">
+              <figure><img src="img/griya-depan.jpg" alt="Render tampak depan rumah tinggal" loading="lazy" width="800" height="450"><figcaption>Render tampak depan, proyek Griya (2025).</figcaption></figure>
+              <figure><img src="img/griya-pojok.jpg" alt="Render sudut rumah tinggal" loading="lazy" width="800" height="450"><figcaption>Render sudut, proyek Griya (2025).</figcaption></figure>
+            </div>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Villa di lahan berbukit</summary>
+          <div class="kat-isi">
+            <p>Bangunan mengikuti kontur, dengan teras bertingkat dan dinding penahan. Dimulai dari ukur kontur dan uji tanah.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Rumah klasik modern</summary>
+          <div class="kat-isi">
+            <p>Fasad simetris dengan tata ruang modern, ventilasi silang, dan material lokal.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Desain interior</summary>
+          <div class="kat-isi">
+            <p>Tata ruang, material, dan pencahayaan untuk rumah dan villa.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="kalk" data-kalk="rumah">
+        <h3>Quick Estimator – Rumah</h3>
+        <p>Estimasi awal berdasarkan luas bangunan dan paket layanan yang dipilih. Tarif merupakan acuan awal per m², bukan penawaran final.</p>
+        <div class="kalk-grid">
+          <label>Luas bangunan (m²)<input type="number" min="0" step="any" id="rm-luas" value="120"></label>
+          <label>Paket layanan<select id="rm-paket">
+            <option value="designbuild" selected>Design & Build</option>
+            <option value="ded">Arsitektur & DED</option>
+            <option value="visual">Desain Konsep & 3D Visual</option>
+          </select></label>
+          <label>Kelas rumah<select id="rm-tingkat">
+            <option value="sederhana">Hunian Esensial</option>
+            <option value="semi" selected>Hunian Nyaman</option>
+            <option value="elit">Hunian Premium</option>
+          </select></label>
+        </div>
+        <div class="kalk-hasil" aria-live="polite" id="rm-hasil"></div>
+        <div class="mt-5 overflow-x-auto">
+          <table class="w-full text-xs text-left border-collapse">
+            <thead><tr class="border-b border-stone-300"><th class="py-2 pr-3">Paket</th><th class="py-2 px-2">Hunian Esensial</th><th class="py-2 px-2">Hunian Nyaman</th><th class="py-2 pl-2">Hunian Premium</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-stone-200"><td class="py-2 pr-3">Design & Build</td><td class="py-2 px-2">Rp3.500.000</td><td class="py-2 px-2">Rp5.500.000</td><td class="py-2 pl-2">Mulai Rp7.500.000</td></tr>
+              <tr class="border-b border-stone-200"><td class="py-2 pr-3">Arsitektur & DED</td><td class="py-2 px-2">Rp50.000</td><td class="py-2 px-2">Rp100.000</td><td class="py-2 pl-2">Rp150.000</td></tr>
+              <tr><td class="py-2 pr-3">Desain Konsep & 3D Visual</td><td class="py-2 px-2">Rp30.000</td><td class="py-2 px-2">Rp50.000</td><td class="py-2 pl-2">Mulai Rp100.000</td></tr>
+            </tbody>
+          </table>
+          <p class="mt-2 text-[11px] text-stone-500">Seluruh tarif dalam rupiah per m². Tarif Hunian Premium untuk Design & Build dan Desain Konsep & 3D Visual merupakan harga mulai.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JALAN -->
+    <div class="kat-panel" id="kp-jalan" role="tabpanel" aria-labelledby="tab-jalan" hidden>
+      <div class="kat-list">
+        <details class="kat-item" open>
+          <summary>Jalan beton rigid dan drainase U-ditch</summary>
+          <div class="kat-isi">
+            <p>Perkerasan beton bertulang wiremesh di atas lapis pondasi agregat, dengan saluran U-ditch di sisi jalan. Cocok untuk jalan akses menanjak di lahan berbukit.</p>
+            <div class="kat-foto">
+              <figure><img src="img/jalan-rigid.jpg" alt="Pengecoran jalan beton rigid bertulang wiremesh dengan saluran U-ditch di lahan berbukit" loading="lazy" width="1600" height="1201"><figcaption>Jalan beton rigid, wiremesh, dan U-ditch, 2020.</figcaption></figure>
+            </div>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Jalan akses perumahan</summary>
+          <div class="kat-isi">
+            <p>Kompleks villa: konstruksi jalan dan drainase sebagai bagian kontrak pekerjaan.</p>
+            <div class="kat-foto">
+              <figure><img src="img/samara-1.jpg" alt="Pekerjaan jalan akses kawasan Samara" loading="lazy" width="1200" height="900"><figcaption>Jalan akses kompleks villa, 2020.</figcaption></figure>
+              <figure><img src="img/samara-2.jpg" alt="Pekerjaan saluran dan jalan kawasan Samara" loading="lazy" width="1200" height="900"><figcaption>Saluran dan jalan kompleks villa, 2021.</figcaption></figure>
+            </div>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Aspal AC-WC</summary>
+          <div class="kat-isi">
+            <p>Lapis aus untuk jalan lingkungan dan sirkuit. Tebal dan takaran mengikuti uji campuran.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Overlay dan pemeliharaan</summary>
+          <div class="kat-isi">
+            <p>Penambalan dan lapis tambahan untuk jalan yang sudah ada.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="kalk" data-kalk="jalan">
+        <h3>Kalkulator volume dan tonase perkerasan</h3>
+        <p>Menghitung luas, volume, dan berat campuran. Berat jenis default 2,3 t/m³; ganti sesuai hasil uji laboratorium.</p>
+        <div class="kalk-grid">
+          <label>Panjang (m)<input type="number" min="0" step="any" id="jl-p" value="200"></label>
+          <label>Lebar (m)<input type="number" min="0" step="any" id="jl-l" value="5"></label>
+          <label>Tebal lapis (cm)<input type="number" min="0" step="any" id="jl-t" value="4"></label>
+          <label>Berat jenis campuran (t/m³)<input type="number" min="0" step="any" id="jl-bj" value="2.3"></label>
+        </div>
+        <div class="kalk-hasil" aria-live="polite" id="jl-hasil"></div>
+      </div>
+    </div>
+
+    <!-- BANGUNAN AIR -->
+    <div class="kat-panel" id="kp-air" role="tabpanel" aria-labelledby="tab-air" hidden>
+      <div class="kat-list">
+        <details class="kat-item" open>
+          <summary>Pembangunan PLTMH</summary>
+          <div class="kat-isi">
+            <p>Intake, headpond, dan rumah pembangkit. Dokumentasi lapangan 2017.</p>
+            <div class="kat-foto">
+              <figure><img src="img/pln-intake.jpg" alt="Lokasi intake PLTMH" loading="lazy" width="1200" height="900"><figcaption>Intake, 29 Mei 2017.</figcaption></figure>
+              <figure><img src="img/pln-headpond.jpg" alt="Headpond dan rumah pembangkit PLTMH" loading="lazy" width="1200" height="900"><figcaption>Headpond dan rumah pembangkit, 29 Mei 2017.</figcaption></figure>
+            </div>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Saluran drainase dan irigasi</summary>
+          <div class="kat-isi">
+            <p>Saluran sepanjang 200 m dengan kemiringan dasar dan kapasitas aliran yang dihitung.</p>
+            <div class="kat-foto">
+              <figure><img src="img/saluran-200m.jpg" alt="Pekerjaan saluran sepanjang 200 meter" loading="lazy" width="1200" height="900"><figcaption>Saluran 200 m, 29 Mei 2017.</figcaption></figure>
+            </div>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Talud dan dinding penahan</summary>
+          <div class="kat-isi">
+            <p>Perhitungan dinding penahan tanah dengan acuan SNI, termasuk pemeriksaan guling dan geser.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="kalk" data-kalk="air">
+        <h3>Kalkulator debit saluran (Manning)</h3>
+        <p>Saluran trapesium dengan aliran seragam. Lebar dasar 0 dan talud 0 berarti saluran persegi. Koefisien n 0,013 untuk beton halus.</p>
+        <div class="kalk-grid">
+          <label>Lebar dasar b (m)<input type="number" min="0" step="any" id="ab-b" value="1"></label>
+          <label>Kedalaman air y (m)<input type="number" min="0" step="any" id="ab-y" value="0.5"></label>
+          <label>Talud m (horizontal : vertikal)<input type="number" min="0" step="any" id="ab-m" value="0"></label>
+          <label>Kemiringan dasar S (m/m)<input type="number" min="0" step="any" id="ab-s" value="0.001"></label>
+          <label>Koefisien kekasaran n<input type="number" min="0" step="any" id="ab-n" value="0.013"></label>
+        </div>
+        <div class="kalk-hasil" aria-live="polite" id="ab-hasil"></div>
+      </div>
+    </div>
+
+    <!-- LANDSCAPE -->
+    <div class="kat-panel" id="kp-landscape" role="tabpanel" aria-labelledby="tab-landscape" hidden>
+      <div class="kat-list">
+        <details class="kat-item" open>
+          <summary>Penataan kawasan perbukitan</summary>
+          <div class="kat-isi">
+            <p>Kompleks villa Samara: cut and fill, landscape lahan, dan pembuatan sawah terasering.</p>
+            <div class="kat-foto">
+              <figure><img src="img/samara-3.jpg" alt="Penataan lereng kawasan Samara" loading="lazy" width="1200" height="900"><figcaption>Kawasan Samara, 2021. Menunggu izin tertulis klien.</figcaption></figure>
+              <figure><img src="img/samara-5.jpg" alt="Penataan kawasan perbukitan Samara" loading="lazy" width="1200" height="900"><figcaption>Kawasan Samara, 2021. Menunggu izin tertulis klien.</figcaption></figure>
+            </div>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Pagar batu alam</summary>
+          <div class="kat-isi">
+            <p>Pagar dan dinding batu alam di kawasan Torok, Lombok.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+        <details class="kat-item">
+          <summary>Taman dan paving</summary>
+          <div class="kat-isi">
+            <p>Perkerasan taman, batu tepi, dan drainase permukaan.</p>
+            <p class="kat-kosong">Foto pengalaman: menyusul.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="kalk" data-kalk="landscape">
+        <h3>Kalkulator paving dan galian-timbunan</h3>
+        <p>Perkiraan kebutuhan material taman dan volume galian dari tinggi rata-rata. Untuk akurasi, gunakan titik kontur.</p>
+        <div class="kalk-grid">
+          <label>Luas paving (m²)<input type="number" min="0" step="any" id="ls-luas" value="80"></label>
+          <label>Tebal base (cm)<input type="number" min="0" step="any" id="ls-base" value="15"></label>
+          <label>Tebal pasir (cm)<input type="number" min="0" step="any" id="ls-pasir" value="3"></label>
+          <label>Cadangan material (%)<input type="number" min="0" step="any" id="ls-cad" value="5"></label>
+          <label>Luas area galian (m²)<input type="number" min="0" step="any" id="ls-gl" value="300"></label>
+          <label>Tinggi galian rata-rata (m)<input type="number" min="0" step="any" id="ls-h" value="0.8"></label>
+          <label>Faktor pengembangan tanah<input type="number" min="0" step="any" id="ls-fk" value="1.25"></label>
+        </div>
+        <div class="kalk-hasil" aria-live="polite" id="ls-hasil"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- PORTOFOLIO TERKURASI DENGAN FILTER -->
+  <section id="portofolio" class="py-24 bg-stone-100/80 border-y border-stone-200">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div>
+          <span class="text-xs tracking-[0.3em] uppercase text-stone-500">Pengalaman & Dokumentasi Proyek</span>
+          <h2 class="mt-2 text-4xl md:text-5xl font-semibold text-stone-900">Pengalaman pekerjaan</h2>
+        </div>
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterPortfolio('all', this)" class="filter-btn active px-5 py-2 text-xs tracking-widest uppercase bg-stone-900 text-white transition">Semua Karya</button>
+          <button onclick="filterPortfolio('hunian', this)" class="filter-btn px-5 py-2 text-xs tracking-widest uppercase bg-white text-stone-700 border border-stone-300 hover:border-stone-900 transition">Villa dan rumah</button>
+          <button onclick="filterPortfolio('sipil', this)" class="filter-btn px-5 py-2 text-xs tracking-widest uppercase bg-white text-stone-700 border border-stone-300 hover:border-stone-900 transition">Air dan jalan</button>
+        </div>
+      </div>
+
+      <!-- Portfolio Grid (Griya & Samara tampil duluan sebagai highlight) -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+        <!-- Samara 1 -->
+        <article class="portfolio-item group cursor-pointer" data-category="hunian" onclick="openLightbox('img/samara-1.jpg', 'Kompleks Villa Samara, foto 1', 'Kompleks villa Samara.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/samara-1.jpg" alt="Samara 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Kompleks Villa Samara</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Kompleks villa</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Cut and fill dan landscape lahan</p>
+        </article>
+
+        <!-- Griya Depan -->
+        <article class="portfolio-item group cursor-pointer" data-category="hunian" onclick="openLightbox('img/griya-depan.jpg', 'Rumah tinggal Griya, render tampak depan', 'Render desain, 2025.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/griya-depan.jpg" alt="Griya Depan" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Rumah Tinggal Griya</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Render</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Render desain rumah tinggal, 2025</p>
+        </article>
+
+        <!-- Samara 2 -->
+        <article class="portfolio-item group cursor-pointer" data-category="hunian" onclick="openLightbox('img/samara-2.jpg', 'Kompleks Villa Samara, sisi lereng', 'Kompleks villa Samara.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/samara-2.jpg" alt="Samara 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Kompleks Villa Samara, Sisi Lereng</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Kompleks villa</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Pekerjaan lereng dan jalan</p>
+        </article>
+
+        <!-- Griya Pojok -->
+        <article class="portfolio-item group cursor-pointer" data-category="hunian" onclick="openLightbox('img/griya-pojok.jpg', 'Rumah tinggal Griya, render sudut', 'Render desain, 2025.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/griya-pojok.jpg" alt="Griya Pojok" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Rumah Tinggal Griya, Sudut</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Render</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Render desain rumah tinggal, 2025</p>
+        </article>
+
+        <!-- Samara 5 -->
+        <article class="portfolio-item group cursor-pointer" data-category="hunian" onclick="openLightbox('img/samara-5.jpg', 'Saluran beton, Samara', 'Kompleks villa Samara.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/samara-5.jpg" alt="Samara 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Kompleks Villa Samara, Saluran</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Kompleks villa</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Saluran beton dan jalan</p>
+        </article>
+
+        <!-- Pembangunan PLTMH: intake -->
+        <article class="portfolio-item group cursor-pointer" data-category="sipil" onclick="openLightbox('img/pln-intake.jpg', 'Pembangunan PLTMH: intake', 'Pembangunan PLTMH, bagian intake.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/pln-intake.jpg" alt="Intake pembangunan PLTMH" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Pembangunan PLTMH: Intake</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Pembangkit</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Pembangunan PLTMH, bangunan air</p>
+        </article>
+
+        <!-- Pembangunan PLTMH: headpond -->
+        <article class="portfolio-item group cursor-pointer" data-category="sipil" onclick="openLightbox('img/pln-headpond.jpg', 'Pembangunan PLTMH: headpond', 'Headpond dan rumah pembangkit.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/pln-headpond.jpg" alt="Headpond pembangunan PLTMH" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Pembangunan PLTMH: Headpond</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Pembangkit</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Headpond dan rumah pembangkit</p>
+        </article>
+
+        <!-- Jalan beton rigid -->
+        <article class="portfolio-item group cursor-pointer" data-category="sipil" onclick="openLightbox('img/jalan-rigid.jpg', 'Jalan beton rigid dan U-ditch', 'Perkerasan beton bertulang wiremesh dengan saluran U-ditch, 2020.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/jalan-rigid.jpg" alt="Jalan beton rigid dan U-ditch" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Jalan beton rigid</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Jalan</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Wiremesh dan saluran U-ditch, 2020</p>
+        </article>
+
+        <!-- Saluran 200m -->
+        <article class="portfolio-item group cursor-pointer" data-category="sipil" onclick="openLightbox('img/saluran-200m.jpg', 'Saluran 200 m', 'Saluran sepanjang 200 m.')">
+          <div class="overflow-hidden bg-stone-200 aspect-[4/3]">
+            <img src="img/saluran-200m.jpg" alt="Saluran 200m" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+          </div>
+          <div class="mt-4 flex justify-between items-baseline">
+            <h3 class="text-2xl font-semibold text-stone-900">Saluran 200 m</h3>
+            <span class="text-[11px] tracking-widest uppercase text-stone-500">Bangunan air</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1">Saluran beton sepanjang 200 m</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<section id="workflow" class="py-20 md:py-24 bg-stone-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="text-xs tracking-[0.2em] uppercase text-amber-800 font-semibold">Metode Kerja STA</span>
+      <h2 class="font-serif-display text-4xl md:text-5xl text-stone-900 mt-3">Dari gagasan ruang hingga bangunan terbangun.</h2>
+      <p class="mt-4 text-stone-600 leading-relaxed">Setiap proyek disusun melalui alur kerja yang terukur, dengan keputusan desain, kebutuhan penghuni, kondisi tapak, dan persyaratan teknis yang saling terhubung.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-7">
+      <article class="bg-white border border-stone-200 overflow-hidden">
+        <img src="img/griya-depan.jpg" alt="Visual arsitektur rumah dan villa Griya" class="w-full aspect-[16/9] object-cover" loading="lazy">
+        <div class="p-7 md:p-8">
+          <span class="text-xs tracking-[0.18em] uppercase text-amber-800 font-semibold">01 · Architecture</span>
+          <h3 class="font-serif-display text-3xl text-stone-900 mt-2">Floor Plan & Spatial Flow — Rumah / Villa</h3>
+          <p class="text-sm text-stone-600 leading-relaxed mt-3">Perencanaan dimulai dari karakter penghuni dan kondisi lahan, lalu diterjemahkan menjadi organisasi ruang yang nyaman, efisien, dan sesuai konteks iklim.</p>
+          <ol class="mt-5 space-y-2 text-sm text-stone-700 list-decimal list-inside">
+            <li>Brief kebutuhan penghuni dan analisis tapak</li>
+            <li>Zoning publik, semi-privat, privat, dan servis</li>
+            <li>Hubungan ruang, sirkulasi, dan alternatif denah</li>
+            <li>Pencahayaan alami, ventilasi, dan respons iklim</li>
+            <li>Pengembangan fasad, material, dan visualisasi 3D</li>
+            <li>Gambar kerja arsitektur dan koordinasi teknis</li>
+          </ol>
+        </div>
+      </article>
+      <article class="bg-white border border-stone-200 overflow-hidden">
+        <img src="img/hero-5-pltmh.jpg" alt="Pekerjaan fasilitas sipil dan infrastruktur PLTMH" class="w-full aspect-[16/9] object-cover" loading="lazy">
+        <div class="p-7 md:p-8">
+          <span class="text-xs tracking-[0.18em] uppercase text-amber-800 font-semibold">02 · Civil & Building</span>
+          <h3 class="font-serif-display text-3xl text-stone-900 mt-2">Civil Building Workflow</h3>
+          <p class="text-sm text-stone-600 leading-relaxed mt-3">Alur terpadu pekerjaan sipil dan bangunan, dari data lapangan hingga pengendalian mutu pelaksanaan, dengan koordinasi lintas disiplin.</p>
+          <ol class="mt-5 space-y-2 text-sm text-stone-700 list-decimal list-inside">
+            <li>Survey, pemetaan, dan investigasi kondisi tanah</li>
+            <li>Konsep arsitektur dan kriteria desain</li>
+            <li>Perencanaan struktur dan fondasi</li>
+            <li>Perencanaan MEP, utilitas, dan drainase</li>
+            <li>Perhitungan volume, RAB, dan dokumen tender</li>
+            <li>Gambar pelaksanaan, koordinasi, dan shop drawing</li>
+            <li>Supervisi, pengendalian mutu, dan as-built</li>
+          </ol>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-950 text-stone-400 py-12 border-t border-stone-900 text-xs">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <span class="font-serif-display text-lg text-white tracking-wider uppercase">Sinar Tata Arsitektur</span>
+        <span class="mx-2">·</span>
+        <span>A Journey in Every Design</span>
+      </div>
+      <div>© 2026 Sinar Tata Arsitektur. Hak Cipta Dilindungi.</div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX MODAL UNTUK ZOOM PORTOFOLIO -->
+  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-6">
+    <div class="max-w-4xl w-full bg-stone-900 border border-stone-800 overflow-hidden" onclick="event.stopPropagation()">
+      <img id="lb-img" alt="" class="w-full max-h-[72vh] object-contain bg-black" loading="lazy" />
+      <div class="p-6 flex justify-between items-center">
+        <div>
+          <h4 id="lb-title" class="text-2xl font-semibold text-white"></h4>
+          <p id="lb-desc" class="text-xs text-stone-400 mt-1"></p>
+        </div>
+        <button onclick="closeLightbox()" class="px-4 py-2 border border-stone-600 text-xs uppercase tracking-widest text-white hover:bg-white hover:text-black transition">Tutup</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const ambil = (id) => Number(document.getElementById(id).value);
-    const format = (angka) =>
-      angka.toLocaleString("id-ID", { maximumFractionDigits: 2 });
+    // Hero Slideshow otomatis (Griya & Samara)
+    const captions = [
+      "01 / SURVEI LAHAN PERBUKITAN",
+      "02 / PENINJAUAN LAHAN",
+      "03 / JALAN LAPIS AGREGAT",
+      "04 / VILLA TAHAP AKHIR",
+      "05 / PEMBANGUNAN PLTMH"
+    ];
+    let currentSlide = 0;
 
-    function tampilkan(id, buatTeks) {
-      const el = document.getElementById(id);
-      try {
-        el.textContent = buatTeks();
-        el.classList.remove("galat");
-      } catch (galat) {
-        el.textContent = galat.message;
-        el.classList.add("galat");
+    function setSlide(index) {
+      currentSlide = index;
+      for (let i = 0; i < captions.length; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        const dot = document.getElementById(`dot-${i}`);
+        if (i === index) {
+          slide.classList.remove('opacity-0', 'scale-105');
+          slide.classList.add('opacity-100', 'scale-100');
+          dot.classList.replace('bg-white/30', 'bg-white');
+        } else {
+          slide.classList.remove('opacity-100', 'scale-100');
+          slide.classList.add('opacity-0', 'scale-105');
+          dot.classList.replace('bg-white', 'bg-white/30');
+        }
       }
+      document.getElementById('slide-caption').innerText = captions[index];
     }
 
-    function perbarui() {
-      const ruang = { panjangRuang: ambil("panjang"), lebarRuang: ambil("lebar") };
+    setInterval(() => setSlide((currentSlide + 1) % captions.length), 5500);
 
-      tampilkan("hasil-keramik", () => {
-        const hasil = hitungKeramik({
-          ...ruang,
-          panjangKeramikCm: ambil("panjang-keramik"),
-          lebarKeramikCm: ambil("lebar-keramik"),
-          isiPerDus: ambil("isi-dus"),
-          cadanganPersen: ambil("cadangan"),
-        });
-        return `Luas lantai ${format(hasil.luasLantai)} m²: ` +
-          `${format(hasil.jumlahKeping)} keping (${format(hasil.jumlahDus)} dus)`;
+    // Filter Portofolio
+    function filterPortfolio(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-stone-900', 'text-white');
+        b.classList.add('bg-white', 'text-stone-700');
       });
+      btn.classList.remove('bg-white', 'text-stone-700');
+      btn.classList.add('bg-stone-900', 'text-white');
 
-      tampilkan("hasil-cat", () => {
-        const hasil = hitungCat({
-          ...ruang,
-          tinggiDinding: ambil("tinggi"),
-          luasBukaan: ambil("bukaan"),
-          jumlahLapis: ambil("lapis"),
-          dayaSebar: ambil("daya-sebar"),
-        });
-        return `Luas dinding ${format(hasil.luasDinding)} m²: ` +
-          `${format(hasil.liter)} liter cat`;
+      document.querySelectorAll('.portfolio-item').forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
       });
     }
 
-    document.querySelectorAll("input").forEach((masukan) => {
-      masukan.addEventListener("input", perbarui);
-    });
-    perbarui();
+    // Lightbox Detail
+    function openLightbox(src, title, desc) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lb-title').innerText = title;
+      document.getElementById('lb-desc').innerText = desc;
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.getElementById('lightbox').classList.add('flex');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+      document.getElementById('lightbox').classList.remove('flex');
+    }
+
+    // Konsultasi website dikirim melalui email; WhatsApp hanya ditawarkan Zahra di dalam chat.
+    function kirimEmail(e) {
+      e.preventDefault();
+      const nama = document.getElementById('wa-nama').value.trim();
+      const email = document.getElementById('wa-hp').value.trim();
+      const lokasi = document.getElementById('wa-lokasi').value.trim();
+      const luas = document.getElementById('wa-luas').value.trim() || "Belum ditentukan";
+      const jenis = document.getElementById('wa-jenis').value;
+      const subjek = encodeURIComponent('Permohonan Konsultasi — ' + nama);
+      const isiEmail = encodeURIComponent('Halo Sinar Tata Arsitektur, saya ingin menjadwalkan konsultasi.\n\nNama: ' + nama + '\nEmail: ' + email + '\nLokasi lahan: ' + lokasi + '\nEstimasi luas: ' + luas + '\nJenis proyek: ' + jenis + '\n\nMohon informasi jadwal konsultasi. Terima kasih.');
+      window.location.href = 'mailto:Sinartataarsitek@gmail.com?subject=' + subjek + '&body=' + isiEmail;
+    }
   </script>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.kat-tabs [role="tab"]'));
+  function pilih(t){
+    tabs.forEach(function(b){
+      var aktif=b===t;
+      b.setAttribute('aria-selected',aktif?'true':'false');
+      b.tabIndex=aktif?0:-1;
+      document.getElementById(b.getAttribute('aria-controls')).hidden=!aktif;
+    });
+    t.focus();
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){pilih(b);});
+    b.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+        var n=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+        pilih(tabs[n]);
+      }
+    });
+  });
+
+  var f=function(id){var v=parseFloat(String(document.getElementById(id).value).replace(',','.'));return isFinite(v)?v:NaN;};
+  var fmt=function(n,d){return Number(n).toLocaleString('id-ID',{minimumFractionDigits:d,maximumFractionDigits:d});};
+  var rp=function(n){return 'Rp '+Math.round(n).toLocaleString('id-ID');};
+  var out=function(id,html){document.getElementById(id).innerHTML=html;};
+  var PERINGATAN='<div class="peringatan">Hitungan awal. Verifikasi oleh tenaga ahli sebelum dipakai.</div>';
+
+  function rumah(){
+    var l=f('rm-luas');
+    var paket=document.getElementById('rm-paket').value;
+    var kelas=document.getElementById('rm-tingkat').value;
+    var tarif={
+      designbuild:{sederhana:3500000,semi:5500000,elit:7500000},
+      ded:{sederhana:50000,semi:100000,elit:150000},
+      visual:{sederhana:30000,semi:50000,elit:100000}
+    };
+    var namaPaket={'designbuild':'Design & Build','ded':'Arsitektur & DED','visual':'Desain Konsep & 3D Visual'};
+    var namaKelas={'sederhana':'Hunian Esensial','semi':'Hunian Nyaman','elit':'Hunian Premium'};
+    var t=tarif[paket][kelas];
+    if(!(l>0)){out('rm-hasil','Isi luas bangunan lebih dari 0.');return;}
+    var labelMulai=(kelas==='elit'&&(paket==='designbuild'||paket==='visual'))?'Mulai dari ':'';
+    out('rm-hasil','Paket: <b>'+namaPaket[paket]+'</b><br>Kelas: <b>'+namaKelas[kelas]+'</b><br>Tarif acuan: <b>'+labelMulai+rp(t)+'/m²</b><br>Estimasi awal ('+fmt(l,2)+' m²): <b>'+rp(l*t)+'</b><br>Nilai ini merupakan estimasi indikatif. Penawaran final mengikuti lingkup pekerjaan, spesifikasi, lokasi, dan pembahasan teknis.'+PERINGATAN);
+  }
+  function jalan(){
+    var p=f('jl-p'),l=f('jl-l'),t=f('jl-t'),bj=f('jl-bj');
+    if(!(p>0&&l>0&&t>0&&bj>0)){out('jl-hasil','Isi panjang, lebar, tebal, dan berat jenis lebih dari 0.');return;}
+    var a=p*l, v=a*t/100, ton=v*bj;
+    out('jl-hasil','Luas: <b>'+fmt(a,1)+' m²</b><br>Volume: <b>'+fmt(v,2)+' m³</b><br>Tonase: <b>'+fmt(ton,2)+' ton</b>'+PERINGATAN);
+  }
+  function air(){
+    var b=f('ab-b'),y=f('ab-y'),m=f('ab-m'),S=f('ab-s'),n=f('ab-n');
+    if(!(b>=0&&y>0&&m>=0&&S>0&&n>0)){out('ab-hasil','Isi b ≥ 0, y, S, dan n lebih dari 0; talud ≥ 0.');return;}
+    var A=(b+m*y)*y, P=b+2*y*Math.sqrt(1+m*m), R=A/P;
+    var Q=(1/n)*A*Math.pow(R,2/3)*Math.sqrt(S), V=Q/A;
+    out('ab-hasil','Luas basah A: <b>'+fmt(A,3)+' m²</b><br>Keliling basah P: <b>'+fmt(P,3)+' m</b><br>Jari-jari hidraulik R: <b>'+fmt(R,3)+' m</b><br>Debit Q: <b>'+fmt(Q,3)+' m³/s</b><br>Kecepatan V: <b>'+fmt(V,2)+' m/s</b><div class="peringatan">Bandingkan V dengan batas kecepatan maksimum bahan saluran. Asumsi aliran seragam.</div>'+PERINGATAN);
+  }
+  function landscape(){
+    var luas=f('ls-luas'),tb=f('ls-base'),tp=f('ls-pasir'),cad=f('ls-cad');
+    var gl=f('ls-gl'),h=f('ls-h'),fk=f('ls-fk');
+    var html='';
+    if(luas>=0&&tb>=0&&tp>=0&&cad>=0){
+      html+='<b>Perkerasan</b><br>Base: <b>'+fmt(luas*tb/100,2)+' m³</b><br>Pasir: <b>'+fmt(luas*tp/100,2)+' m³</b><br>Paving: <b>'+fmt(luas*(1+cad/100),1)+' m²</b> (termasuk cadangan)<br>';
+    } else { html+='Perkerasan: isi luas dan tebal dengan benar.<br>'; }
+    if(gl>=0&&h>=0&&fk>0){
+      var g=gl*h;
+      html+='<br><b>Galian-timbunan</b><br>Volume galian (padat): <b>'+fmt(g,2)+' m³</b><br>Volume lepas: <b>'+fmt(g*fk,2)+' m³</b>';
+    } else { html+='<br>Galian: isi luas, tinggi, dan faktor dengan benar.'; }
+    out('ls-hasil',html+PERINGATAN);
+  }
+
+  var map={rumah:rumah,jalan:jalan,air:air,landscape:landscape};
+  document.querySelectorAll('[data-kalk]').forEach(function(box){
+    var fn=map[box.getAttribute('data-kalk')];
+    box.addEventListener('input',fn);
+    box.addEventListener('change',fn);
+    fn();
+  });
+})();
+</script>
+
+<!-- ASISTEN TATA (pet virtual STA) · tahap 1: pemandu menu + FAQ tetap, tanpa server.
+     Tahap AI nanti: isi window.STA_ASISTEN.jawab dengan fungsi yang memanggil endpoint server
+     (mis. Netlify Function). Jangan pernah menaruh API key di halaman ini. -->
+<style>
+  .tata-wrap{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:40;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+  .tata-btn{width:62px;height:62px;border-radius:50%;background:#F4EEE6;border:1.5px solid #B0653A;box-shadow:0 8px 24px rgba(45,42,40,.28);cursor:pointer;display:grid;place-items:center;padding:0;transition:transform .2s}
+  .tata-btn:hover{transform:translateY(-2px)}
+  .tata-btn:focus-visible,.tata-panel button:focus-visible{outline:2px solid #B0653A;outline-offset:3px}
+  .tata-btn svg{width:44px;height:44px}.tata-btn{overflow:hidden}.tata-btn img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+  .tata-eye{transform-origin:center;animation:tata-kedip 5s infinite}
+  @keyframes tata-kedip{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+  .tata-sapa{position:absolute;right:72px;bottom:10px;width:max-content;max-width:220px;background:#2D2A28;color:#F4EEE6;font-size:13px;line-height:1.4;padding:9px 12px;border-radius:12px 12px 2px 12px;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;pointer-events:none;transform:translateY(6px);transition:.3s}
+  .tata-sapa.tampil{opacity:1;transform:none}
+  .tata-panel{position:absolute;right:0;bottom:76px;width:min(340px,calc(100vw - 32px));max-height:min(520px,calc(100vh - 120px));display:none;flex-direction:column;background:#F4EEE6;color:#2D2A28;border:1px solid #d8c8b6;border-radius:16px;box-shadow:0 16px 40px rgba(45,42,40,.3);overflow:hidden}
+  .tata-panel.buka{display:flex}
+  .tata-kepala{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#2D2A28;color:#F4EEE6}
+  .tata-kepala b{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;letter-spacing:.02em}
+  .tata-kepala small{display:block;font-size:11px;color:#d9b89c;letter-spacing:.08em;text-transform:uppercase}
+  .tata-tutup{margin-left:auto;background:none;border:0;color:#F4EEE6;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}
+  .tata-isi{padding:12px 14px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.5}
+  .tata-pesan{background:#fff;border:1px solid #e6d9cb;border-radius:12px 12px 12px 2px;padding:9px 11px}
+  .tata-pesan.saya{align-self:flex-end;background:#B0653A;color:#fff;border-color:#B0653A;border-radius:12px 12px 2px 12px}
+  .tata-pilih{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px 14px;border-top:1px solid #e6d9cb;background:#efe6da}
+  .tata-pilih button{font:inherit;font-size:12.5px;background:#fff;color:#2D2A28;border:1px solid #B0653A;border-radius:999px;padding:6px 11px;cursor:pointer}
+  .tata-pilih button:hover{background:#B0653A;color:#fff}
+  .tata-catatan{font-size:11px;color:#7a6e64;padding:0 14px 10px;background:#efe6da}
+  @media (prefers-reduced-motion:reduce){.tata-eye{animation:none}.tata-btn,.tata-sapa{transition:none}}
+</style>
+
+<div class="tata-wrap" id="tata">
+  <div class="tata-sapa" id="tata-sapa" aria-hidden="true">Halo, saya Zahra, Admin STA Arsitek. Ada yang bisa saya bantu?</div>
+  <div class="tata-panel" id="tata-panel" role="dialog" aria-modal="false" aria-labelledby="tata-judul">
+    <div class="tata-kepala">
+      <img src="img/admin-sta.webp" alt="Zahra — Admin STA Arsitek" class="w-11 h-11 rounded-full object-cover border-2 border-amber-700" />
+      <div><b id="tata-judul">Zahra</b><small>Admin STA Arsitek</small></div>
+      <button class="tata-tutup" id="tata-tutup" aria-label="Tutup asisten">×</button>
+    </div>
+    <div class="tata-isi" id="tata-isi" aria-live="polite"></div>
+    <div class="tata-pilih" id="tata-pilih"></div>
+    <div class="tata-catatan">Informasi dari Zahra bersifat umum. Kepastian biaya dan jadwal disampaikan setelah konsultasi.</div>
+  </div>
+  <button class="tata-btn" id="tata-btn" aria-label="Hubungi Zahra, Admin STA Arsitek" aria-expanded="false" aria-controls="tata-panel">
+    <img src="img/admin-sta.webp" alt="Foto admin STA Arsitek" class="w-full h-full rounded-full object-cover" />
+    <svg viewBox="0 0 64 64" aria-hidden="true" style="display:none">
+      <defs>
+        <g id="tata-burung" fill="none" stroke="#B0653A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 18 L22 25 M47 18 L42 25"/>
+          <path d="M16 30 C16 20 23 15 32 15 C41 15 48 20 48 30 L48 40 C48 50 41 56 32 56 C23 56 16 50 16 40 Z"/>
+          <circle cx="25" cy="31" r="6.5"/><circle cx="39" cy="31" r="6.5"/>
+          <path d="M30 38 L32 42 L34 38"/>
+          <path d="M23 47 C27 50 37 50 41 47"/>
+        </g>
+      </defs>
+      <use href="#tata-burung"/>
+      <g class="tata-eye"><circle cx="25" cy="31" r="2.4" fill="#2D2A28"/><circle cx="39" cy="31" r="2.4" fill="#2D2A28"/></g>
+    </svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  // Jawaban tetap tahap 1. Wajib disetujui Pimpinan sebelum situs diterbitkan.
+  var FAQ = [
+    {t:'Lihat karya', a:'Ini beberapa dokumentasi pekerjaan dan render desain kami.', ke:'#portofolio'},
+    {t:'Konsep desain', a:'Ada 8 gaya rumah dan villa, lengkap dengan penyesuaian untuk iklim dan gempa Lombok.', ke:'#konsep'},
+    {t:'Perkiraan biaya', a:'Perkiraan awal bisa Anda hitung di kalkulator rumah (luas × tarif minimum per m²). Hasilnya bukan penawaran; harga pasti setelah gambar kerja dan RAB.', ke:'#katalog'},
+    {t:'Layanan apa saja?', a:'Tiga tahap: (1) desain konsep dan 3D, (2) gambar kerja arsitektur, struktur, MEP, dan RAB, (3) perencanaan serta pelaksanaan pembangunan. Anda bisa memilih tahap yang dibutuhkan.', ke:'#layanan'},
+    {t:'Alur kerja', a:'Konsultasi → survei dan ukur lahan → desain konsep → gambar kerja dan RAB → pembangunan dengan laporan progres mingguan.'},
+    {t:'Lahan miring, bisa?', a:'Bisa. Kami mulai dari pengukuran kontur dan data tanah, lalu pondasi dan dinding penahan tanah dihitung sebelum desain dikunci.'},
+    {t:'Lokasi layanan', a:'Kantor kami di Mataram. Kami melayani proyek di Lombok, termasuk Mandalika, dan Sumbawa.'},
+    {t:'Berapa lama desain?', a:'Tergantung luas dan kerumitan bangunan. Jadwal pasti kami sampaikan setelah konsultasi dan survei lahan.'},
+    {t:'Konsultasi', a:'Silakan isi formulir konsultasi. Pesan Anda akan diteruskan ke tim kami lewat WhatsApp.', ke:'#konsultasi'}
+  ];
+  window.STA_ASISTEN = window.STA_ASISTEN || {jawab:null}; // tahap AI: fungsi(pertanyaan) -> Promise<string>
+
+  var wrap=document.getElementById('tata'), btn=document.getElementById('tata-btn'),
+      panel=document.getElementById('tata-panel'), isi=document.getElementById('tata-isi'),
+      pilih=document.getElementById('tata-pilih'), sapa=document.getElementById('tata-sapa'),
+      tutup=document.getElementById('tata-tutup'), mulai=false, jumlahTanya=0, tawaranKontak=false;
+
+  function pesan(teks, saya){
+    var d=document.createElement('div'); d.className='tata-pesan'+(saya?' saya':''); d.textContent=teks;
+    isi.appendChild(d); isi.scrollTop=isi.scrollHeight;
+  }
+  function tombol(){
+    pilih.innerHTML='';
+    FAQ.forEach(function(f){
+      var b=document.createElement('button'); b.type='button'; b.textContent=f.t;
+      b.addEventListener('click',function(){
+        pesan(f.t,true); pesan(f.a,false);
+        jumlahTanya++;
+        if(jumlahTanya>=3 && !tawaranKontak){
+          tawaranKontak=true;
+          pesan('Jika Anda ingin membahas kebutuhan proyek lebih lanjut, saya bisa menghubungkan Anda dengan bagian Engineering STA Arsitek melalui WhatsApp. Silakan pilih tombol kontak di bawah.',false);
+          var wa=document.createElement('a');
+          wa.href='https://wa.me/6281237719149?text='+encodeURIComponent('Halo STA Arsitek, saya ingin melanjutkan konsultasi dengan bagian Engineering. Berikut ringkasan pembicaraan saya dengan Zahra: '+Array.from(isi.querySelectorAll('.tata-pesan')).map(function(x){return x.textContent;}).join(' | '));
+          wa.target='_blank'; wa.rel='noopener noreferrer'; wa.className='inline-block rounded-full px-4 py-2 text-xs font-semibold'; wa.style.cssText='background:#2D2A28;color:#F4EEE6;text-decoration:none;margin:8px 0;';
+          wa.textContent='Hubungi Bagian Engineering';
+          pilih.innerHTML=''; pilih.appendChild(wa);
+        }
+        if(f.ke){ var el=document.querySelector(f.ke); if(el){ setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'start'}); if(window.innerWidth<640) setPanel(false); },500); } }
+      });
+      pilih.appendChild(b);
+    });
+  }
+  function setPanel(buka){
+    panel.classList.toggle('buka',buka); btn.setAttribute('aria-expanded',buka?'true':'false');
+    sapa.classList.remove('tampil');
+    if(buka && !mulai){ mulai=true; pesan('Halo, saya Zahra, Admin STA Arsitek. Pilih topik yang ingin Anda tanyakan.',false); tombol(); }
+    if(buka) tutup.focus(); else btn.focus();
+  }
+  btn.addEventListener('click',function(){ setPanel(!panel.classList.contains('buka')); });
+  tutup.addEventListener('click',function(){ setPanel(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && panel.classList.contains('buka')) setPanel(false); });
+
+  // Sapaan sekali per kunjungan
+  var sudah=false; try{ sudah=sessionStorage.getItem('tata-sapa')==='1'; }catch(e){}
+  if(!sudah){
+    setTimeout(function(){ if(!panel.classList.contains('buka')){ sapa.classList.add('tampil'); setTimeout(function(){ sapa.classList.remove('tampil'); },6000); } },4000);
+    try{ sessionStorage.setItem('tata-sapa','1'); }catch(e){}
+  }
+})();
+</script>
+
 </body>
 </html>
